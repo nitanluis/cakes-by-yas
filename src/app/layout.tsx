@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/hero-cake.png",
+        url: "/images/hero-cake-new.jpeg",
         width: 1200,
         height: 630,
-        alt: "Elegant artisanal cake by Cakes by Yas with golden crown and butterflies",
+        alt: "Beautiful artisanal cake by Cakes by Yas",
       },
     ],
   },
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Cakes by Yas | Artisanal Cakes in Texas",
     description:
       "Edible art for your sweetest moments. Order via WhatsApp.",
-    images: ["/images/hero-cake.png"],
+    images: ["/images/hero-cake-new.jpeg"],
   },
   robots: {
     index: true,
@@ -81,7 +81,7 @@ export default function RootLayout({
       { "@type": "City", name: "Houston, Texas" },
     ],
     priceRange: "$$",
-    image: "/images/hero-cake.png",
+    image: "/images/hero-cake-new.jpeg",
     sameAs: ["https://www.instagram.com/cakes_byyas_/"],
   };
 

@@ -1,147 +1,121 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
-const WHATSAPP_URL =
-  "https://wa.me/18626680038?text=Hola%20Yas!%20Vi%20tu%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20consultar%20por%20un%20pastel...";
+gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const sparkleRef = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.fromTo(
-        imageRef.current,
-        { scale: 1.15, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.4 }
-      )
-        .fromTo(
-          titleRef.current,
-          { y: 60, opacity: 0, clipPath: "inset(100% 0 0 0)" },
-          { y: 0, opacity: 1, clipPath: "inset(0% 0 0 0)", duration: 1 },
-          "-=0.8"
-        )
-        .fromTo(
-          subtitleRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=0.4"
-        )
-        .fromTo(
-          ctaRef.current,
-          { y: 20, opacity: 0, scale: 0.9 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.6 },
-          "-=0.3"
-        );
-    }, sectionRef);
+    // Fade in text elements
+    tl.from(".hero-element", {
+      y: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 1.2,
+      delay: 0.2
+    })
+    // Scale up the image gracefully
+    .from(imageWrapperRef.current, {
+      scale: 0.95,
+      opacity: 0,
+      y: 60,
+      duration: 1.5,
+      ease: "power2.out"
+    }, "-=0.8");
 
-    return () => ctx.revert();
-  }, []);
+    // Continuous floating animation for glow
+    gsap.to(glowRef.current, {
+      y: -20,
+      scale: 1.05,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    // Continuous rotation for sparkle
+    gsap.to(sparkleRef.current, {
+      rotate: 360,
+      duration: 20,
+      repeat: -1,
+      ease: "linear"
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <section
-      ref={sectionRef}
-      id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4"
-    >
-      {/* Background Image with Overlay */}
-      <div ref={imageRef} className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-cake.png"
-          alt="Pastel artesanal elegante con corona dorada, mariposas y esferas decorativas - Cakes by Yas"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(45,27,20,0.55) 0%, rgba(45,27,20,0.75) 60%, rgba(253,246,240,1) 100%)",
-          }}
-        />
-      </div>
+    <section id="inicio" className="w-full relative flex flex-col items-center pt-32 md:pt-48 pb-16 md:pb-24 px-6 overflow-hidden">
+      
+      {/* Subtle top left ambient light */}
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[var(--color-secondary)]/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-3xl mx-auto">
-        <div className="mb-4">
-          <span
-            className="inline-block px-5 py-2 text-sm font-medium tracking-[0.15em] uppercase rounded-full border"
-            style={{
-              color: "rgba(253,246,240,0.9)",
-              borderColor: "rgba(253,246,240,0.25)",
-              background: "rgba(253,246,240,0.08)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            ✦ Repostería Artesanal ✦
-          </span>
-        </div>
-
-        <h1
-          ref={titleRef}
-          className="font-[family-name:var(--font-cormorant)] font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 leading-[0.95] tracking-tight"
-          style={{ color: "var(--color-text-light)" }}
-        >
-          Cakes by Yas
-        </h1>
-
-        <p
-          ref={subtitleRef}
-          className="text-lg sm:text-xl md:text-2xl font-light mb-10 max-w-xl mx-auto leading-relaxed"
-          style={{ color: "rgba(253,246,240,0.85)" }}
-        >
-          Arte comestible para tus momentos más dulces
+      <div ref={containerRef} className="w-full max-w-[1200px] flex flex-col items-center justify-center text-center z-10 relative">
+        
+        {/* Subtle Overline Content */}
+        <p className="hero-element text-xs md:text-sm uppercase tracking-[0.2em] mb-6 font-medium" style={{ color: "var(--color-primary)" }}>
+          Made with Love in Texas
         </p>
 
-        <a
-          ref={ctaRef}
-          href="#pasteles"
-          className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-          style={{
-            background: "var(--color-primary)",
-            boxShadow: "var(--shadow-glow)",
-          }}
-        >
-          Ver Pasteles
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        {/* Elegant Heading — Single Line */}
+        <div className="hero-element relative inline-block">
+          {/* Decorative Sparkle */}
+          <svg 
+            ref={sparkleRef}
+            className="absolute -top-4 -right-8 md:-top-6 md:-right-12 w-8 md:w-12 h-8 md:h-12 opacity-80" 
+            style={{ color: "var(--color-accent)" }}
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="1"
           >
-            <path d="M12 5v14M19 12l-7 7-7-7" />
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" opacity="0.3" />
           </svg>
-        </a>
-      </div>
+          
+          <h1 className="font-[family-name:var(--font-heading)] text-5xl sm:text-6xl md:text-8xl lg:text-[110px] font-normal italic leading-[1] mb-6 tracking-tight whitespace-nowrap">
+            Cakes <span className="text-[var(--color-primary)] relative">
+              By Yas.
+            </span>
+          </h1>
+        </div>
 
-      {/* Decorative bottom curve */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 z-10">
-        <svg
-          viewBox="0 0 1440 60"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 60V30C240 0 480 0 720 15C960 30 1200 45 1440 30V60H0Z"
-            fill="#FDF6F0"
+        {/* Description */}
+        <p className="hero-element text-base md:text-lg max-w-[500px] mx-auto mb-12 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+          Handcrafted cakes and passionate pastry design to elevate your most unforgettable moments.
+        </p>
+
+        {/* Hero Image Presentation */}
+        <div className="relative w-full max-w-[1000px] mt-4 md:mt-8">
+          {/* Ambient Glow behind image */}
+          <div 
+            ref={glowRef}
+            className="absolute inset-0 bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] opacity-20 blur-[60px] rounded-[3rem] -z-10"
           />
-        </svg>
+          
+          <div 
+            ref={imageWrapperRef}
+            className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[2/1] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-image bg-white backdrop-blur-sm border border-white/40"
+          >
+            <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none mix-blend-multiply" />
+            <Image
+              src="/images/hero-cake-new.jpeg"
+              alt="Artisanal hero cake by Cakes by Yas"
+              fill
+              priority
+              className="object-cover object-center transition-transform duration-[10s] hover:scale-105"
+            />
+          </div>
+        </div>
+        
       </div>
     </section>
   );

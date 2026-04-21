@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍰 Cakes by Yas - Arte Comestible
 
-## Getting Started
+Bienvenido al repositorio oficial de **Cakes by Yas**, una landing page premium diseñada para reflejar la elegancia, el detalle y el amor depositado en cada creación de repostería artesanal en Texas (Spring, The Woodlands y Houston).
 
-First, run the development server:
+![Cakes by Yas Logo](/Landing%20Page%20Cake%20by%20Yas/Logo%20Cakes%20by%20Yas.jpg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Características
+
+- **Diseño Ultra-Premium:** Estética sofisticada orientada a la alta repostería.
+- **Animaciones Fluídas:** Experiencia de usuario inmersiva utilizando **GSAP** (GreenSock Animation Platform) para transiciones y efectos de scroll.
+- **Arquitectura Moderna:** Desarrollado con **Next.js 15+** y **React 19** para un rendimiento óptimo y SEO amigable.
+- **Estilizado de Vanguardia:** Implementación de **Tailwind CSS v4** para un sistema de diseño rápido y flexible.
+- **Totalmente Responsivo:** Optimizado para una visualización perfecta en dispositivos móviles, tablets y escritorio.
+- **Interacción Directa:** Integración con WhatsApp e Instagram para facilitar pedidos y consultas.
+
+## 🚀 Tecnologías Utilizadas
+
+- [Next.js](https://nextjs.org/) - Framework de React para producción.
+- [React](https://reactjs.org/) - Biblioteca para interfaces de usuario.
+- [GSAP](https://greensock.com/gsap/) - Animaciones de alto rendimiento.
+- [Tailwind CSS v4](https://tailwindcss.com/) - Framework de CSS orientado a utilidades.
+- [TypeScript](https://www.typescriptlang.org/) - Tipado estático para un desarrollo robusto.
+- [Vercel](https://vercel.com/) - Plataforma de despliegue y hosting.
+
+## 🛠️ Instalación y Configuración
+
+Para ejecutar este proyecto localmente, sigue estos pasos:
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/cakes-by-yas.git
+   cd cakes-by-yas/Landing\ Page\ Cake\ by\ Yas
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Ejecutar el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+## 📁 Estructura del Proyecto
+
+```text
+src/
+├── app/            # Rutas y diseño global (App Router)
+├── components/     # Componentes de UI reutilizables (Hero, Menu, Footer, etc.)
+├── public/         # Activos estáticos (Imágenes, logos, iconos)
+└── styles/         # Configuraciones globales de CSS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 👩‍🍳 Sobre Cakes by Yas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Localizados en **Spring, TX**, nos especializamos en:
+- Pasteles de especialidad y temáticos.
+- Repostería casera con ingredientes de alta calidad.
+- Arte comestible para eventos inolvidables.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📬 Contacto
 
-## Learn More
+¿Tienes un evento especial? ¡Hablemos!
+- **Instagram:** [@cakes_byyas_](https://www.instagram.com/cakes_byyas_/)
+- **WhatsApp:** [+1 (862) 668-0038](https://wa.me/18626680038)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Hecho con 💕 por **Cakes by Yas**

@@ -1,43 +1,49 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════
-   CAKES BY YAS — Design System Tokens
+   CAKES BY YAS — Grace-Inspired Design System
+   Chic · Cute · Editorial · Warm
    ═══════════════════════════════════════════════ */
 
 :root {
-  /* Brand Colors */
-  --color-primary: #EA677D;
-  --color-primary-hover: #d4536a;
-  --color-secondary: #F8A8B1;
-  --color-accent: #D4A85C;
+  /* Brand Colors — Official Cakes by Yas palette */
+  --color-primary: #EA677D;         /* Coral rose — buttons, accents */
+  --color-primary-hover: #D4566B;
+  --color-secondary: #F8A8B1;       /* Soft pink — subtle accents */
+  --color-accent: #F0919E;          /* Rose mid — decorative details */
 
   /* Backgrounds */
-  --color-bg: #FDF6F0;
-  --color-bg-block: #FFF5F7;
-  --color-bg-dark: #2D1B14;
+  --color-bg: #FDF8F8;              /* Warm rose-tinted cream */
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #0A0A0A;         /* True black per brand */
 
   /* Text */
-  --color-text: #2D1B14;
-  --color-text-muted: #7A6B63;
-  --color-text-light: #FDF6F0;
+  --color-text: #1A1A1A;            /* Near black — brand text */
+  --color-text-muted: #7A7A7A;      /* Neutral grey */
+  --color-text-light: #FDF8F8;
 
   /* Surfaces */
-  --color-surface: #FFFFFF;
-  --color-border: rgba(234, 103, 125, 0.12);
+  --color-border: #E8E0DA;
+  --color-border-light: #F0EBE7;
 
   /* Shadows */
-  --shadow-soft: 0 4px 24px rgba(234, 103, 125, 0.06);
-  --shadow-medium: 0 8px 32px rgba(234, 103, 125, 0.10);
-  --shadow-glow: 0 0 40px rgba(234, 103, 125, 0.15);
+  --shadow-soft: 0 2px 20px rgba(44, 36, 33, 0.04);
+  --shadow-medium: 0 8px 30px rgba(44, 36, 33, 0.08);
+  --shadow-image: 0 20px 60px rgba(44, 36, 33, 0.12);
 
   /* Radius */
-  --radius-block: 24px;
-  --radius-button: 16px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
   --radius-pill: 9999px;
 
   /* Transitions */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-base: 300ms var(--ease-out-expo);
+  --ease-elegant: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-base: 400ms var(--ease-elegant);
+
+  /* Fonts */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 }
 
 /* Tailwind v4 Theme Extension */
@@ -46,13 +52,10 @@
   --color-foreground: var(--color-text);
   --color-primary: #EA677D;
   --color-secondary: #F8A8B1;
-  --color-accent: #D4A85C;
-  --color-muted: #7A6B63;
-  --color-cream: #FDF6F0;
-  --color-blush: #FFF5F7;
-  --color-cocoa: #2D1B14;
-  --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-cormorant);
+  --color-accent: #F0919E;
+  --color-muted: #7A7A7A;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
 /* ═══════════════════════════════════════════════
@@ -72,22 +75,9 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
   position: relative;
-}
-
-/* Warm grain texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -95,27 +85,60 @@ body::before {
    ═══════════════════════════════════════════════ */
 
 h1, h2, h3, h4 {
-  font-family: var(--font-cormorant), Georgia, serif;
+  font-family: var(--font-heading);
   color: var(--color-text);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 /* ═══════════════════════════════════════════════
-   MARQUEE ANIMATION
+   COMPONENTS
    ═══════════════════════════════════════════════ */
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* Elegant thin divider */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  width: 100%;
 }
 
-.marquee-track {
-  animation: marquee 25s linear infinite;
+/* Dotted price connector (menu style) */
+.price-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--color-border);
+  margin: 0 12px;
+  position: relative;
+  bottom: 4px;
 }
 
-.marquee-track:hover {
-  animation-play-state: paused;
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ═══════════════════════════════════════════════
+   SELECTION
+   ═══════════════════════════════════════════════ */
+
+::selection {
+  background: var(--color-secondary);
+  color: var(--color-text);
 }
 
 /* ═══════════════════════════════════════════════
@@ -144,33 +167,137 @@ h1, h2, h3, h4 {
 }
 
 /* ═══════════════════════════════════════════════
-   SCROLLBAR
+   NAV LINK — Warm Holographic Shimmer Hover
+   IG ICON — Expanding Gradient Pill Hover
    ═══════════════════════════════════════════════ */
 
-::-webkit-scrollbar {
-  width: 8px;
+/* ── Nav Link Shimmer ── */
+.nav-link-shimmer {
+  position: relative !important;
+  display: inline-block !important;
+  padding: 6px 14px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: all 0.5s ease !important;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
+.nav-link-shimmer::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    transparent 40%,
+    rgba(234, 103, 125, 0.12)
+  ) !important;
+  transform: rotate(-45deg) !important;
+  transition: all 0.6s ease !important;
+  opacity: 0 !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
-  border-radius: var(--radius-pill);
+.nav-link-shimmer:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 0 18px rgba(234, 103, 125, 0.15) !important;
+  background: rgba(234, 103, 125, 0.05) !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+.nav-link-shimmer:hover::before {
+  opacity: 1 !important;
+  transform: rotate(-45deg) translateY(100%) !important;
 }
 
-/* ═══════════════════════════════════════════════
-   SELECTION
-   ═══════════════════════════════════════════════ */
+/* ── Instagram Expanding Pill ── */
+a.ig-pill {
+  position: relative !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 50px !important;
+  background: #fff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  text-decoration: none !important;
+}
 
-::selection {
-  background: var(--color-secondary);
-  color: var(--color-text);
+a.ig-pill::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 50px !important;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+  opacity: 0 !important;
+  transition: opacity 0.5s ease !important;
+}
+
+a.ig-pill::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 8px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50px !important;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+  filter: blur(12px) !important;
+  z-index: -1 !important;
+  opacity: 0 !important;
+  transition: opacity 0.5s ease !important;
+}
+
+a.ig-pill:hover {
+  width: 120px !important;
+  box-shadow: none !important;
+}
+
+a.ig-pill:hover::before {
+  opacity: 1 !important;
+}
+
+a.ig-pill:hover::after {
+  opacity: 0.45 !important;
+}
+
+a.ig-pill .ig-svg {
+  position: relative !important;
+  z-index: 2 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.4s ease, stroke 0.4s ease !important;
+  transition-delay: 0.15s !important;
+}
+
+a.ig-pill:hover .ig-svg {
+  transform: scale(0) !important;
+  transition-delay: 0s !important;
+  stroke: #fff !important;
+}
+
+a.ig-pill .ig-text {
+  position: absolute !important;
+  z-index: 2 !important;
+  color: #fff !important;
+  font-size: 0.7em !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  transform: scale(0) !important;
+  transition: transform 0.4s ease !important;
+  transition-delay: 0s !important;
+}
+
+a.ig-pill:hover .ig-text {
+  transform: scale(1) !important;
+  transition-delay: 0.15s !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -183,8 +310,5 @@ h1, h2, h3, h4 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .marquee-track {
-    animation: none;
   }
 }

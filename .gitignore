@@ -50,3 +50,5 @@ ISOTIPO.jpeg
 # IDE / agents
 .agents/
 CLAUDE.md
+
+.vercel

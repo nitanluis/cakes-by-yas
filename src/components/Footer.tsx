@@ -35,10 +35,13 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="py-16 sm:py-24 px-4"
-      style={{ background: "var(--color-bg-dark)" }}
+      className="px-2 pb-2 w-full flex justify-center"
     >
-      <div className="footer-content max-w-[1280px] mx-auto">
+      <div 
+        className="w-full rounded-[2rem] md:rounded-[3rem] py-16 sm:py-24 px-8 md:px-16"
+        style={{ background: "var(--color-bg-dark)" }}
+      >
+        <div className="footer-content max-w-[1280px] mx-auto">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-12 mb-16">
           {/* Brand */}
@@ -53,7 +56,7 @@ export default function Footer() {
                 loading="lazy"
               />
               <h2
-                className="font-[family-name:var(--font-cormorant)] text-3xl sm:text-4xl font-bold"
+                className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold italic"
                 style={{ color: "var(--color-text-light)" }}
               >
                 Cakes by Yas
@@ -61,9 +64,9 @@ export default function Footer() {
             </div>
             <p
               className="text-base max-w-sm leading-relaxed"
-              style={{ color: "rgba(253,246,240,0.6)" }}
+              style={{ color: "rgba(253,248,248,0.6)" }}
             >
-              Homemade with love. Arte comestible para tus momentos más dulces.
+              Homemade with love. Edible art for your sweetest moments.
             </p>
           </div>
 
@@ -74,19 +77,19 @@ export default function Footer() {
                 className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Navegación
+                Navigation
               </h4>
               <ul className="space-y-3">
                 {[
-                  { label: "Inicio", href: "#inicio" },
-                  { label: "Pasteles", href: "#pasteles" },
-                  { label: "Especialidades", href: "#especialidades" },
+                  { label: "Home", href: "#inicio" },
+                  { label: "Menu", href: "#pasteles" },
+                  { label: "Creations", href: "#collections" },
                 ].map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
-                      style={{ color: "rgba(253,246,240,0.5)" }}
+                      style={{ color: "rgba(253,248,248,0.5)" }}
                     >
                       {link.label}
                     </a>
@@ -100,7 +103,7 @@ export default function Footer() {
                 className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Contacto
+                Contact
               </h4>
               <ul className="space-y-3">
                 <li>
@@ -109,7 +112,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
-                    style={{ color: "rgba(253,246,240,0.5)" }}
+                    style={{ color: "rgba(253,248,248,0.5)" }}
                   >
                     WhatsApp
                   </a>
@@ -120,7 +123,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
-                    style={{ color: "rgba(253,246,240,0.5)" }}
+                    style={{ color: "rgba(253,248,248,0.5)" }}
                   >
                     Instagram
                   </a>
@@ -133,11 +136,11 @@ export default function Footer() {
                 className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Ubicación
+                Location
               </h4>
               <p
                 className="text-sm leading-relaxed"
-                style={{ color: "rgba(253,246,240,0.5)" }}
+                style={{ color: "rgba(253,248,248,0.5)" }}
               >
                 Spring, TX
                 <br />
@@ -152,18 +155,19 @@ export default function Footer() {
         {/* Divider */}
         <div
           className="h-px w-full mb-8"
-          style={{ background: "rgba(253,246,240,0.08)" }}
+          style={{ background: "rgba(253,248,248,0.08)" }}
         />
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs" style={{ color: "rgba(253,246,240,0.35)" }}>
-            © {new Date().getFullYear()} Cakes by Yas. Todos los derechos
-            reservados.
+          <p className="text-xs" style={{ color: "rgba(253,248,248,0.35)" }}>
+            © {new Date().getFullYear()} Cakes by Yas. All rights
+            reserved.
           </p>
-          <p className="text-xs" style={{ color: "rgba(253,246,240,0.35)" }}>
-            Hecho con 💕 en Spring, Texas
+          <p className="text-xs" style={{ color: "rgba(253,248,248,0.35)" }}>
+            Made with 💕 in Spring, Texas
           </p>
+        </div>
         </div>
       </div>
     </footer>

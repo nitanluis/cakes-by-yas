@@ -50,6 +50,10 @@ export const metadata: Metadata = {
       "Edible art for your sweetest moments. Order via WhatsApp.",
     images: ["/images/hero-cake-new.jpeg"],
   },
+  icons: {
+    icon: "/isotipo.png",
+    apple: "/isotipo.png",
+  },
   robots: {
     index: true,
     follow: true,

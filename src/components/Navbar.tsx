@@ -48,10 +48,15 @@ export default function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex items-center justify-between">
         
-        {/* Logo - Elegant Serif with shimmer */}
-        <a href="#inicio" className="nav-link-shimmer flex items-center shrink-0 w-auto whitespace-nowrap">
+        {/* Logo - Elegant Serif without overriding flex layout */}
+        <a href="#inicio" className="flex items-center shrink-0 w-auto flex-nowrap gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]">
+          <img 
+            src="/isotipo.png" 
+            alt="Cakes By Yas Icon" 
+            className="w-10 h-10 md:w-12 md:h-12 object-contain"
+          />
           <span
-            className="font-[family-name:var(--font-heading)] italic font-semibold text-2xl lg:text-3xl"
+            className="font-[family-name:var(--font-heading)] italic font-semibold text-2xl lg:text-3xl hidden sm:inline-block"
             style={{ color: "var(--color-primary)" }}
           >
             Cakes By Yas.
@@ -92,8 +97,8 @@ export default function Navbar() {
 
         {/* Desktop Socials — IG expanding pill */}
         <div className="hidden md:flex items-center justify-end w-auto">
-          <a href="https://www.instagram.com/cakes_byyas_/" target="_blank" rel="noopener noreferrer" className="ig-pill" aria-label="Instagram">
-            <svg className="ig-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#777" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <a href="https://www.instagram.com/cakes_byyas_/" target="_blank" rel="noopener noreferrer" className="ig-pill group" aria-label="Instagram">
+            <svg className="ig-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -160,8 +165,8 @@ export default function Navbar() {
           </a>
           
           <div className="flex items-center justify-center gap-6 mt-4">
-            <a href="https://www.instagram.com/cakes_byyas_/" target="_blank" rel="noopener noreferrer" className="ig-pill" aria-label="Instagram">
-              <svg className="ig-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#777" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a href="https://www.instagram.com/cakes_byyas_/" target="_blank" rel="noopener noreferrer" className="ig-pill group" aria-label="Instagram">
+              <svg className="ig-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               <span className="ig-text">Follow</span>
             </a>
           </div>

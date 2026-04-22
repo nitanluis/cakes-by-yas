@@ -35,60 +35,59 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="px-2 pb-2 w-full flex justify-center"
+      className="w-full flex justify-center mt-auto"
     >
       <div 
-        className="w-full rounded-[2rem] md:rounded-[3rem] py-16 sm:py-24 px-8 md:px-16"
+        className="w-full py-10 md:py-16 px-6 md:px-12 border-t border-[rgba(0,0,0,0.05)]"
         style={{ background: "var(--color-bg-dark)" }}
       >
-        <div className="footer-content max-w-[1280px] mx-auto">
+        <div className="footer-content max-w-[1400px] mx-auto">
         {/* Top Section */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-12 mb-16">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 mb-10 relative">
+          
           {/* Brand */}
-          <div className="text-center md:text-left">
-            <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
-              <Image
-                src="/images/isotipo.jpeg"
+          <div className="text-center md:text-left flex-1">
+            <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
+              <img
+                src="/isotipo.png"
                 alt="Cakes by Yas isotipo"
-                width={48}
-                height={48}
-                className="rounded-full"
+                className="w-8 h-8 object-contain"
                 loading="lazy"
               />
               <h2
-                className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold italic"
+                className="font-[family-name:var(--font-heading)] text-2xl font-bold italic"
                 style={{ color: "var(--color-text-light)" }}
               >
-                Cakes by Yas
+                Cakes by Yas.
               </h2>
             </div>
             <p
-              className="text-base max-w-sm leading-relaxed"
-              style={{ color: "rgba(253,248,248,0.6)" }}
+              className="text-xs max-w-[280px] leading-relaxed mx-auto md:mx-0"
+              style={{ color: "rgba(253,248,248,0.5)" }}
             >
-              Homemade with love. Edible art for your sweetest moments.
+              Edible art for your sweetest moments.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 text-center sm:text-left">
+          <div className="flex flex-row justify-center md:justify-end gap-12 sm:gap-20 text-left flex-1">
             <div>
               <h4
-                className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
+                className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Navigation
+                Menu
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {[
                   { label: "Home", href: "#inicio" },
-                  { label: "Menu", href: "#pasteles" },
+                  { label: "Cakes", href: "#pasteles" },
                   { label: "Creations", href: "#collections" },
                 ].map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
+                      className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
                       style={{ color: "rgba(253,248,248,0.5)" }}
                     >
                       {link.label}
@@ -100,18 +99,18 @@ export default function Footer() {
 
             <div>
               <h4
-                className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
+                className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Contact
+                Social
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 <li>
                   <a
                     href="https://wa.me/18626680038"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
+                    className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
                     style={{ color: "rgba(253,248,248,0.5)" }}
                   >
                     WhatsApp
@@ -122,7 +121,7 @@ export default function Footer() {
                     href="https://www.instagram.com/cakes_byyas_/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm transition-colors duration-300 hover:text-[var(--color-primary)]"
+                    className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
                     style={{ color: "rgba(253,248,248,0.5)" }}
                   >
                     Instagram
@@ -130,41 +129,21 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-
-            <div>
-              <h4
-                className="text-sm font-semibold uppercase tracking-[0.15em] mb-4"
-                style={{ color: "var(--color-primary)" }}
-              >
-                Location
-              </h4>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "rgba(253,248,248,0.5)" }}
-              >
-                Spring, TX
-                <br />
-                The Woodlands, TX
-                <br />
-                Houston, TX
-              </p>
-            </div>
           </div>
         </div>
 
         {/* Divider */}
         <div
-          className="h-px w-full mb-8"
-          style={{ background: "rgba(253,248,248,0.08)" }}
+          className="h-px w-full mb-6"
+          style={{ background: "rgba(253,248,248,0.06)" }}
         />
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs" style={{ color: "rgba(253,248,248,0.35)" }}>
-            © {new Date().getFullYear()} Cakes by Yas. All rights
-            reserved.
+          <p className="text-[11px]" style={{ color: "rgba(253,248,248,0.3)" }}>
+            © {new Date().getFullYear()} Cakes by Yas. All rights reserved.
           </p>
-          <p className="text-xs" style={{ color: "rgba(253,248,248,0.35)" }}>
+          <p className="text-[11px]" style={{ color: "rgba(253,248,248,0.3)" }}>
             Made with 💕 in Spring, Texas
           </p>
         </div>

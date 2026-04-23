@@ -2,29 +2,28 @@
 
 import { useState, useEffect } from "react";
 import React from "react";
+import Link from "next/link";
 
 const NAV_LINKS_LEFT = [
-  { label: "Menu", href: "#pasteles" },
-  { label: "Creations", href: "#collections" },
+  { label: "Menu", href: "/#pasteles" },
 ];
 
 const NAV_LINKS_RIGHT = [
-  { label: "About", href: "#historia" },
-  { label: "Contact", href: "#contacto" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contacto" },
 ];
 
 const WHATSAPP_URL =
   "https://wa.me/18626680038?text=Hola%20Yas!%20I'd%20like%20to%20order%20a%20custom%20cake.";
 
-// Elegant NavLink with holographic shimmer hover
 const NavLink = ({ label, href }: { label: string; href: string }) => (
-  <a
+  <Link
     href={href}
     className="nav-link-shimmer text-[13px] md:text-sm italic font-[family-name:var(--font-heading)] transition-colors duration-300 hover:text-[var(--color-primary)]"
     style={{ color: "var(--color-text)" }}
   >
     {label}
-  </a>
+  </Link>
 );
 
 export default function Navbar() {
@@ -52,8 +51,8 @@ export default function Navbar() {
         <div className="md:hidden w-8 h-8"></div>
 
         {/* Logo - Absolute centered on mobile, left-aligned on desktop */}
-        <a 
-          href="#inicio" 
+        <Link 
+          href="/" 
           className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
         >
           <img 
@@ -67,7 +66,7 @@ export default function Navbar() {
           >
             Cakes By Yas.
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Links (Centered) */}
         <div className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2 flex-nowrap gap-8">
@@ -149,7 +148,7 @@ export default function Navbar() {
       >
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-6">
           {[...NAV_LINKS_LEFT, ...NAV_LINKS_RIGHT].map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
@@ -157,7 +156,7 @@ export default function Navbar() {
               style={{ color: "var(--color-text)" }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
             href={WHATSAPP_URL}

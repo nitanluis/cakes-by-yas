@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import PromoBlocks from "@/components/PromoBlocks";
-import Menu from "@/components/Menu";
+import PricingMenu from "@/components/PricingMenu";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -14,9 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SectionDivider variant="aurora" />
-      <PromoBlocks />
-      <SectionDivider variant="prism" />
-      <Menu />
+      <PricingMenu />
       <SectionDivider variant="ribbon" />
       <About />
       <Contact />

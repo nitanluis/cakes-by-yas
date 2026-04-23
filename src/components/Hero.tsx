@@ -103,7 +103,7 @@ export default function Hero() {
           
           <div 
             ref={imageWrapperRef}
-            className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[2/1] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-image bg-white backdrop-blur-sm border border-white/40"
+            className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[2/1] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-image border border-white/40"
           >
             <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none mix-blend-multiply" />
             <Image

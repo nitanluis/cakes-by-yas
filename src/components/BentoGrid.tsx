@@ -32,6 +32,7 @@ export default function BentoGrid() {
               toggleActions: "play none none none",
             },
             delay: i * 0.08,
+            force3D: true,
           }
         );
       });

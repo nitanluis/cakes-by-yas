@@ -93,7 +93,7 @@ export default function WhatsAppButton() {
           <div className="w-10 h-10 rounded-[10px] bg-[#007AFF]/10 flex items-center justify-center text-[#007AFF] group-hover:scale-110 transition-transform duration-300">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
           </div>
-          <span className="text-[15px] font-medium text-[var(--color-text)] pr-4">Mensaje (SMS)</span>
+          <span className="text-[15px] font-medium text-[var(--color-text)] pr-4">Text (SMS)</span>
         </a>
       </div>
 
@@ -101,15 +101,16 @@ export default function WhatsAppButton() {
       <button
         ref={btnRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="px-6 py-4 rounded-full shadow-image flex items-center gap-3 transition-all duration-500 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
+        className={`px-6 py-3.5 md:py-4 rounded-full flex items-center gap-3 transition-all duration-500 relative overflow-hidden group hover:scale-[1.03] active:scale-95 ${!isOpen ? 'shadow-[0_8px_25px_rgba(234,103,125,0.4)] hover:shadow-[0_12px_30px_rgba(234,103,125,0.6)]' : 'shadow-lg'}`}
         style={{ 
-          background: isOpen ? "var(--color-primary)" : "var(--color-text)", 
-          color: isOpen ? "var(--color-bg)" : "var(--color-bg)" 
+          background: isOpen ? "var(--color-bg-dark)" : "linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%)", 
+          color: "#FFFFFF",
+          border: isOpen ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(255,255,255,0.3)"
         }}
         aria-label="Toggle contact menu"
       >
-        <span className="text-[13px] font-bold tracking-[0.1em] uppercase">
-          {isOpen ? "Cerrar" : "Order Now"}
+        <span className="text-[12px] md:text-[13px] font-bold tracking-[0.1em] uppercase drop-shadow-sm">
+          {isOpen ? "Close" : "Order Now"}
         </span>
         <div className="relative w-5 h-5 flex items-center justify-center">
           <svg 

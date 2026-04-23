@@ -54,7 +54,7 @@ export default function PromoBlocks() {
   }, { scope: containerRef });
 
   return (
-    <section id="collections" className="relative px-6 md:px-12 py-24 md:py-40 w-full flex justify-center bg-[var(--color-bg)] overflow-hidden">
+    <section id="collections" className="relative px-6 md:px-12 pt-20 pb-8 md:pt-40 md:pb-20 w-full flex justify-center bg-[var(--color-bg)] overflow-hidden">
       
       {/* Holographic Ambient Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1000px] h-full pointer-events-none opacity-40 mix-blend-multiply">
@@ -91,11 +91,11 @@ export default function PromoBlocks() {
                   {item.title}
                 </h3>
               </div>
-              <p className="text-base md:text-lg text-[var(--color-text-muted)] max-w-[400px] leading-relaxed transition-colors duration-500 group-hover:text-[var(--color-text)] mb-10">
+              <p className="text-base md:text-lg text-[var(--color-text-muted)] max-w-[400px] leading-relaxed transition-colors duration-500 group-hover:text-[var(--color-text)] md:mb-10">
                 {item.desc}
               </p>
               
-              <div className="h-px w-full max-w-[100px] bg-[var(--color-primary)] transition-all duration-700 ease-elegant group-hover:max-w-full opacity-60" />
+              <div className="hidden md:block h-px w-full max-w-[100px] bg-[var(--color-primary)] transition-all duration-700 ease-elegant group-hover:max-w-full opacity-60" />
             </div>
             
           </div>

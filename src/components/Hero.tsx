@@ -54,7 +54,7 @@ export default function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section id="inicio" className="w-full relative flex flex-col items-center pt-32 md:pt-48 pb-16 md:pb-24 px-6 overflow-hidden">
+    <section id="inicio" className="w-full relative flex flex-col items-center pt-32 md:pt-40 pb-8 md:pb-12 px-6 overflow-hidden">
       
       {/* Subtle top left ambient light */}
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[var(--color-secondary)]/10 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -89,12 +89,23 @@ export default function Hero() {
         </div>
 
         {/* Description */}
-        <p className="hero-element text-base md:text-lg max-w-[500px] mx-auto mb-12 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+        <p className="hero-element text-base md:text-lg max-w-[500px] mx-auto mb-8 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
           Handcrafted cakes and passionate pastry design to elevate your most unforgettable moments.
         </p>
 
+        {/* Primary CTA */}
+        <div className="hero-element flex items-center justify-center mb-10 md:mb-12">
+          <a
+            href="#pasteles"
+            className="px-8 py-3.5 text-[13px] md:text-sm font-bold uppercase tracking-widest text-[#FBF7F4] rounded-full shadow-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            style={{ background: "var(--color-primary)" }}
+          >
+            View Menu
+          </a>
+        </div>
+
         {/* Hero Image Presentation */}
-        <div className="relative w-full max-w-[1000px] mt-4 md:mt-8">
+        <div className="relative w-full max-w-[1000px] mt-2 md:mt-4">
           {/* Ambient Glow behind image */}
           <div 
             ref={glowRef}
@@ -108,11 +119,27 @@ export default function Hero() {
             <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none mix-blend-multiply" />
             <Image
               src="/images/hero-cake-new.jpeg"
-              alt="Artisanal hero cake by Cakes by Yas"
+              alt="Artisanal custom cake by Cakes by Yas"
               fill
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
               className="object-cover object-center transition-transform duration-[10s] hover:scale-105"
             />
+          </div>
+
+          {/* Rotating Premium Badge */}
+          <div className="hero-element absolute -bottom-4 -right-2 md:bottom-4 md:-right-4 z-20 w-28 h-28 md:w-36 md:h-36 pointer-events-none drop-shadow-2xl bg-white/40 backdrop-blur-md rounded-full p-2 border border-white/60">
+            <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_12s_linear_infinite]">
+              <path id="curve" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="transparent" />
+              <text fontSize="11" fontWeight="bold" letterSpacing="1.8" fill="var(--color-primary)" className="uppercase">
+                <textPath href="#curve" startOffset="0%">
+                  100% CUSTOM DESIGN • MADE WITH LOVE • 
+                </textPath>
+              </text>
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl md:text-3xl drop-shadow-sm">✨</span>
+            </div>
           </div>
         </div>
         

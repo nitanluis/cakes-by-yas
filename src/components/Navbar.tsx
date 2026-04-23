@@ -48,15 +48,21 @@ export default function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex items-center justify-between">
         
-        {/* Logo - Elegant Serif without overriding flex layout */}
-        <a href="#inicio" className="flex items-center shrink-0 w-auto flex-nowrap gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]">
+        {/* Spacer for mobile to balance flex layout with hamburger */}
+        <div className="md:hidden w-8 h-8"></div>
+
+        {/* Logo - Absolute centered on mobile, left-aligned on desktop */}
+        <a 
+          href="#inicio" 
+          className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
+        >
           <img 
             src="/isotipo.png" 
             alt="Cakes By Yas Icon" 
-            className="w-10 h-10 md:w-12 md:h-12 object-contain"
+            className="w-10 h-10 md:w-14 md:h-14 object-contain"
           />
           <span
-            className="font-[family-name:var(--font-heading)] italic font-semibold text-2xl lg:text-3xl hidden sm:inline-block"
+            className="font-[family-name:var(--font-heading)] italic font-semibold text-2xl lg:text-3xl"
             style={{ color: "var(--color-primary)" }}
           >
             Cakes By Yas.

@@ -23,7 +23,7 @@ export default function Contact() {
   }, { scope: waRef });
 
   return (
-    <section id="contacto" className="px-6 md:px-12 py-12 md:py-16 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
+    <section id="contacto" className="px-6 md:px-12 pt-4 pb-16 md:pt-8 md:pb-24 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-primary)]/5 blur-[120px] rounded-[100%] pointer-events-none -z-10" />
 

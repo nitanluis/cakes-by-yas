@@ -38,7 +38,7 @@ export default function Footer() {
       className="w-full flex justify-center mt-auto"
     >
       <div 
-        className="w-full py-10 md:py-16 px-6 md:px-12 border-t border-[rgba(0,0,0,0.05)]"
+        className="w-full pt-10 pb-28 md:pt-16 md:pb-32 px-6 md:px-12 border-t border-[rgba(0,0,0,0.05)]"
         style={{ background: "var(--color-bg-dark)" }}
       >
         <div className="footer-content max-w-[1400px] mx-auto">

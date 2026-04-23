@@ -32,7 +32,7 @@ export default function About() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="about" className="px-6 md:px-12 py-16 md:py-24 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="px-6 md:px-12 pt-8 pb-2 md:pt-16 md:pb-8 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[var(--color-secondary)]/10 blur-[120px] rounded-[100%] pointer-events-none -z-10" />
 
@@ -45,9 +45,9 @@ export default function About() {
           Cakes by Yas was born from a vision of artisanal excellence and Dominican heritage, nurtured by a passion for creating unforgettable celebrations. Our journey began with a simple desire: to offer a haven where guests could experience the perfect balance of traditional flavor and modern elegance.
         </p>
         
-        <div className="about-animate w-full max-w-[600px] h-[1px] my-10" style={{ background: "linear-gradient(90deg, transparent, rgba(234, 103, 125, 0.3), transparent)" }} />
+        <div className="about-animate w-full max-w-[600px] h-[1px] my-8 md:my-10" style={{ background: "linear-gradient(90deg, transparent, rgba(234, 103, 125, 0.3), transparent)" }} />
         
-        <p className="about-animate font-[family-name:var(--font-heading)] italic text-xl md:text-2xl px-4 md:px-16 leading-relaxed" style={{ color: "var(--color-primary)" }}>
+        <p className="about-animate font-[family-name:var(--font-heading)] italic text-2xl md:text-3xl px-8 md:px-16 leading-relaxed" style={{ color: "var(--color-primary)" }}>
           "Our dedication to artisanal detail is the heart and soul behind every exceptional creation."
         </p>
 

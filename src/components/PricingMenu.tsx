@@ -160,8 +160,8 @@ export default function PricingMenu() {
   const activeCategory = MENU_CATEGORIES.find(c => c.id === activeTab);
 
   return (
-    <section id="pasteles" className="w-full flex justify-center px-4 md:px-12 py-16 md:py-24 bg-[var(--color-bg)]">
-      <div ref={containerRef} className="w-full max-w-[1000px] flex flex-col items-center">
+    <section id="menu" className="w-full flex justify-center px-4 md:px-12 py-16 md:py-24 bg-[var(--color-bg)]">
+      <div ref={containerRef} className="w-full max-w-none xl:max-w-[1920px] px-0 md:px-8 flex flex-col items-center">
         
         <div className="text-center mb-12">
           <h2 className="font-[family-name:var(--font-heading)] italic text-5xl md:text-6xl mb-4" style={{ color: "var(--color-text)" }}>
@@ -193,7 +193,7 @@ export default function PricingMenu() {
         </div>
 
         {/* Interactive Order Builder List */}
-        <div ref={listRef} className="w-full max-w-[800px] flex flex-col gap-4 md:gap-5 min-h-[400px]">
+        <div ref={listRef} className="w-full max-w-[1400px] flex flex-col gap-4 md:gap-5 min-h-[400px]">
           {activeCategory?.items.map((item) => {
             const isExpanded = expandedId === item.id;
             const currentSize = selectedSizes[item.id];
@@ -344,25 +344,7 @@ export default function PricingMenu() {
           })}
         </div>
 
-        {/* Gallery CTA */}
-        <div className="mt-16 text-center flex flex-col items-center">
-          <p className="text-sm md:text-base text-[var(--color-text-muted)] mb-6 max-w-[400px]">
-            Want to see our artistry in action? Browse our curated collection of real custom cakes.
-          </p>
-          <Link
-            href="/gallery"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-text)] text-white font-semibold uppercase tracking-widest text-sm rounded-full overflow-hidden transition-all duration-500 hover:scale-105 shadow-md hover:shadow-xl"
-          >
-            <span className="relative z-10">View Photo Gallery</span>
-            <svg 
-              className="relative z-10 w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" 
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-            <div className="absolute inset-0 bg-[var(--color-primary)] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-elegant" />
-          </Link>
-        </div>
+        {/* Gallery CTA Removed */}
 
       </div>
     </section>

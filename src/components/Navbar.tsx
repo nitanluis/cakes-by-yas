@@ -5,7 +5,8 @@ import React from "react";
 import Link from "next/link";
 
 const NAV_LINKS_LEFT = [
-  { label: "Menu", href: "/#pasteles" },
+  { label: "Creations", href: "/#pasteles" },
+  { label: "Menu", href: "/#menu" },
 ];
 
 const NAV_LINKS_RIGHT = [
@@ -68,9 +69,9 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Links (Centered) */}
-        <div className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2 flex-nowrap gap-8">
-          <div className="flex items-center gap-8">
+        {/* Desktop Links — right of logo, centered in remaining space */}
+        <div className="hidden md:flex items-center flex-1 justify-center gap-6 lg:gap-8 ml-8">
+          <div className="flex items-center gap-6 lg:gap-8">
             {NAV_LINKS_LEFT.map((link) => (
               <NavLink key={link.href} label={link.label} href={link.href} />
             ))}
@@ -79,21 +80,21 @@ export default function Navbar() {
           {/* Dynamic Expanding CTA Button */}
           <div 
             className={`flex items-center justify-center transition-all duration-700 ease-elegant overflow-hidden whitespace-nowrap ${
-              scrolled ? "w-[180px] opacity-100 mx-8" : "w-0 opacity-0 mx-0 pointer-events-none"
+              scrolled ? "w-[140px] opacity-100 mx-4" : "w-0 opacity-0 mx-0 pointer-events-none"
             }`}
           >
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 text-[11px] font-semibold uppercase tracking-widest text-[#FBF7F4] rounded shadow-sm transition-all duration-300 hover:opacity-90 w-full text-center hover:-translate-y-0.5"
+              className="px-5 py-2 text-[11px] font-semibold uppercase tracking-widest text-[#FBF7F4] rounded shadow-sm transition-all duration-300 hover:opacity-90 w-full text-center hover:-translate-y-0.5"
               style={{ background: "var(--color-primary)" }}
             >
               Order Now
             </a>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6 lg:gap-8">
             {NAV_LINKS_RIGHT.map((link) => (
               <NavLink key={link.href} label={link.label} href={link.href} />
             ))}

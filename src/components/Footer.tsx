@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,8 +38,8 @@ export default function Footer() {
       className="w-full flex justify-center mt-auto"
     >
       <div 
-        className="w-full pt-10 pb-28 md:pt-16 md:pb-32 px-6 md:px-12 border-t border-[rgba(0,0,0,0.05)]"
-        style={{ background: "var(--color-bg-dark)" }}
+        className="w-full pt-10 pb-28 md:pt-16 md:pb-32 px-5 sm:px-6 md:px-12 border-t border-[rgba(0,0,0,0.05)]"
+        style={{ background: "#F5F0EB" }}
       >
         <div className="footer-content max-w-[1400px] mx-auto">
         {/* Top Section */}
@@ -56,42 +56,44 @@ export default function Footer() {
               />
               <h2
                 className="font-[family-name:var(--font-heading)] text-2xl font-bold italic"
-                style={{ color: "var(--color-text-light)" }}
+                style={{ color: "var(--color-text)" }}
               >
                 Cakes by Yas.
               </h2>
             </div>
             <p
               className="text-xs max-w-[280px] leading-relaxed mx-auto md:mx-0"
-              style={{ color: "rgba(253,248,248,0.5)" }}
+              style={{ color: "var(--color-text-muted)" }}
             >
-              Edible art for your sweetest moments.
+              Edible art for your sweetest moments. Handcrafted in Spring, Texas.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-row justify-center md:justify-end gap-12 sm:gap-20 text-left flex-1">
+          <div className="flex flex-row justify-center md:justify-end gap-12 sm:gap-16 text-left flex-1">
             <div>
               <h4
                 className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Menu
+                Navigate
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {[
-                  { label: "Home", href: "#inicio" },
-                  { label: "Cakes", href: "#pasteles" },
-                  { label: "Creations", href: "#collections" },
+                  { label: "Home", href: "/#inicio" },
+                  { label: "Creations", href: "/#pasteles" },
+                  { label: "Menu", href: "/#menu" },
+                  { label: "About", href: "/#about" },
+                  { label: "Contact", href: "/#contacto" },
                 ].map((link) => (
                   <li key={link.href}>
-                    <a
+                    <Link
                       href={link.href}
                       className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
-                      style={{ color: "rgba(253,248,248,0.5)" }}
+                      style={{ color: "var(--color-text-muted)" }}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -102,16 +104,16 @@ export default function Footer() {
                 className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-4"
                 style={{ color: "var(--color-primary)" }}
               >
-                Social
+                Connect
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 <li>
                   <a
                     href="https://wa.me/18626680038"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
-                    style={{ color: "rgba(253,248,248,0.5)" }}
+                    style={{ color: "var(--color-text-muted)" }}
                   >
                     WhatsApp
                   </a>
@@ -122,9 +124,18 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
-                    style={{ color: "rgba(253,248,248,0.5)" }}
+                    style={{ color: "var(--color-text-muted)" }}
                   >
                     Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="sms:18626680038"
+                    className="text-xs transition-colors duration-300 hover:text-[var(--color-primary)]"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    Text / SMS
                   </a>
                 </li>
               </ul>
@@ -135,15 +146,28 @@ export default function Footer() {
         {/* Divider */}
         <div
           className="h-px w-full mb-6"
-          style={{ background: "rgba(253,248,248,0.06)" }}
+          style={{ background: "rgba(0,0,0,0.06)" }}
         />
 
+        {/* Texas Cottage Food Law Disclaimer */}
+        <div className="mb-6">
+          <p
+            className="text-[10px] sm:text-[11px] leading-relaxed max-w-[800px] mx-auto text-center md:text-left"
+            style={{ color: "var(--color-text-muted)", opacity: 0.8 }}
+          >
+            <strong style={{ color: "var(--color-text)" }}>Texas Cottage Food Law Disclosure:</strong>{" "}
+            This product is made in a home kitchen that is not subject to state inspection or regulation, 
+            and that may also process common food allergens such as tree nuts, peanuts, eggs, soy, wheat, 
+            milk, and fish. This product is not intended for resale.
+          </p>
+        </div>
+
         {/* Bottom */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[11px]" style={{ color: "rgba(253,248,248,0.3)" }}>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[10px] sm:text-[11px]" style={{ color: "var(--color-text-muted)", opacity: 0.7 }}>
             © {new Date().getFullYear()} Cakes by Yas. All rights reserved.
           </p>
-          <p className="text-[11px]" style={{ color: "rgba(253,248,248,0.3)" }}>
+          <p className="text-[10px] sm:text-[11px]" style={{ color: "var(--color-text-muted)", opacity: 0.7 }}>
             Made with 💕 in Spring, Texas
           </p>
         </div>

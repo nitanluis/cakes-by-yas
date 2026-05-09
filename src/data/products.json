@@ -1,0 +1,80 @@
+[
+  {
+    "id": "intimate-wedding",
+    "name": "Golden Glamour Celebration",
+    "desc": "Vanilla cake with a silky buttercream finish, adorned with luxury gold spheres and 24k gold leaf details.",
+    "image": "/images/real_cakes/real_cake_2.jpeg"
+  },
+  {
+    "id": "classic-birthday",
+    "name": "Crimson Hearts Anniversary",
+    "desc": "A minimalist and romantic design with artisanal red calligraphy and heart details, perfect for celebrating love.",
+    "image": "/images/real_cakes/real_cake_5.jpeg"
+  },
+  {
+    "id": "themed-celebration",
+    "name": "Real Champion Football Cake",
+    "desc": "The ultimate cake for Real Madrid fans, featuring grass green finishes and premium custom toppers.",
+    "image": "/images/real_cakes/real_cake_4.jpeg"
+  },
+  {
+    "id": "vintage-heart",
+    "name": "Coquette Cherry Vintage",
+    "desc": "1950s inspired retro aesthetic with cherry patterns and piped cream borders. The sweetest trend of the season.",
+    "image": "/images/real_cakes/real_cake_6.jpeg"
+  },
+  {
+    "id": "pink-glamour",
+    "name": "Legendary Flight 23",
+    "desc": "Striking design in absolute black and vibrant red, paying homage to urban culture and the iconic Michael Jordan.",
+    "image": "/images/real_cakes/real_cake_7.jpeg"
+  },
+  {
+    "id": "baby-shower",
+    "name": "Royal Butterfly Dream",
+    "desc": "Pure elegance with a golden crown and embossed monarch butterflies, ideal for princesses of all ages.",
+    "image": "/images/real_cakes/real_cake_8.jpeg"
+  },
+  {
+    "id": "textured-elegance",
+    "name": "Racing Adventure Nathan",
+    "desc": "An adrenaline-filled cake with a mirror red finish and Cars-themed details that will thrill any children's party.",
+    "image": "/images/real_cakes/real_cake_3.jpeg"
+  },
+  {
+    "id": "tiered-masterpiece",
+    "name": "Signature Heart Chocoflan",
+    "desc": "Our house specialty: a heart-shaped chocoflan featuring velvety vanilla flan and intense chocolate cake, crowned with fresh strawberries.",
+    "image": "/images/real_cakes/real_cake_9.jpeg"
+  },
+  {
+    "id": "choco-drip",
+    "name": "Whimsical Trolls Garden",
+    "desc": "A colorful two-tiered structure with handmade flowers and a magical world inspired by Trolls.",
+    "image": "/images/real_cakes/real_cake_1.jpeg"
+  },
+  {
+    "id": "heart-choco-drip",
+    "name": "Sweetheart Valentine's Chocoflan",
+    "desc": "The perfect combination of textures: smooth flan and moist cake in a heart-shaped design for unforgettable moments.",
+    "image": "/images/real_cakes/real_cake_10.jpeg"
+  },
+  {
+    "id": "dominican-flan",
+    "name": "Festive Christmas Garland",
+    "desc": "Festive cake with a buttercream Christmas garland design, capturing the colors and joy of the holiday season.",
+    "image": "/images/real_cakes/real_cake_11.jpeg"
+  },
+  {
+    "id": "number-cake",
+    "name": "Rio Carnival Fantasy",
+    "desc": "An explosion of tropical colors and Rio characters, designed to make every bite feel like a celebration.",
+    "image": "/images/real_cakes/real_cake_13.jpeg"
+  },
+  {
+    "id": "custom-masterpiece",
+    "name": "Timeless Gold Sparkle",
+    "desc": "Sophistication in every layer, with hand-painted chocolate spheres and a premium gold acrylic 'Happy Birthday' topper.",
+    "image": "/images/real_cakes/cake_1.png"
+  }
+]

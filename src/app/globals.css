@@ -178,36 +178,30 @@ h1, h2, h3, h4 {
   border-radius: 12px !important;
   overflow: hidden !important;
   cursor: pointer !important;
-  transition: all 0.5s ease !important;
+  transition: all 0.3s ease !important;
 }
 
-.nav-link-shimmer::before {
+.nav-link-shimmer::after {
   content: '' !important;
   position: absolute !important;
-  top: -50% !important;
-  left: -50% !important;
-  width: 200% !important;
-  height: 200% !important;
-  background: linear-gradient(
-    0deg,
-    transparent,
-    transparent 40%,
-    rgba(234, 103, 125, 0.12)
-  ) !important;
-  transform: rotate(-45deg) !important;
-  transition: all 0.6s ease !important;
-  opacity: 0 !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: var(--color-primary) !important;
+  transition: width 0.3s ease !important;
+  border-radius: 2px !important;
 }
 
 .nav-link-shimmer:hover {
   transform: scale(1.08) !important;
-  box-shadow: 0 0 18px rgba(234, 103, 125, 0.15) !important;
-  background: rgba(234, 103, 125, 0.05) !important;
+  background: rgba(234, 103, 125, 0.08) !important;
+  color: var(--color-primary) !important;
 }
 
-.nav-link-shimmer:hover::before {
-  opacity: 1 !important;
-  transform: rotate(-45deg) translateY(100%) !important;
+.nav-link-shimmer:hover::after {
+  width: 70% !important;
 }
 
 /* ── Instagram Expanding Pill ── */

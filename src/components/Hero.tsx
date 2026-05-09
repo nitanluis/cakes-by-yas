@@ -2,147 +2,276 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Hero() {
-  const containerRef = useRef(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const sparkleRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // ── Entrance timeline ──
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+    });
 
-    // Fade in text elements
-    tl.from(".hero-element", {
-      y: 40,
+    // Title lines slide up with stagger
+    tl.from(".hero-title-line", {
+      y: 100,
       opacity: 0,
       stagger: 0.15,
       duration: 1.2,
-      delay: 0.2
+      delay: 0.2,
     })
-    // Scale up the image gracefully
-    .from(imageWrapperRef.current, {
-      scale: 0.95,
+    // Overline
+    .from(".hero-overline", {
+      y: 15,
       opacity: 0,
-      y: 60,
-      duration: 1.5,
-      ease: "power2.out"
-    }, "-=0.8");
+      duration: 0.8,
+    }, "-=0.7")
+    // Subtitle and CTA
+    .from(".hero-subtitle", {
+      y: 25,
+      opacity: 0,
+      duration: 0.9,
+    }, "-=0.5")
+    .from(".hero-cta", {
+      y: 15,
+      opacity: 0,
+      duration: 0.7,
+    }, "-=0.5")
+    // Image reveal
+    .from(imageRef.current, {
+      scale: 1.1,
+      opacity: 0,
+      duration: 1.6,
+      ease: "power2.out",
+    }, 0.1)
+    // Bottom bar
+    .from(".hero-bottom", {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+    }, "-=0.4");
 
-    // Continuous floating animation for glow
-    gsap.to(glowRef.current, {
-      y: -20,
-      scale: 1.05,
-      duration: 4,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
+    // ── Scroll-driven parallax ──
+    // Gentle image parallax
+    gsap.to(imageRef.current, {
+      y: -60,
+      scale: 1.04,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
     });
 
-    // Continuous rotation for sparkle
-    gsap.to(sparkleRef.current, {
-      rotate: 360,
-      duration: 20,
-      repeat: -1,
-      ease: "linear"
+    // Content fades out as user scrolls
+    gsap.to(".hero-content-block", {
+      y: -40,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "10% top",
+        end: "50% top",
+        scrub: true,
+      },
+    });
+
+    // Bottom bar fades
+    gsap.to(".hero-bottom", {
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "5% top",
+        end: "25% top",
+        scrub: true,
+      },
+    });
+
+    // Subtle darken
+    gsap.to(overlayRef.current, {
+      opacity: 0.25,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
     });
 
   }, { scope: containerRef });
 
   return (
-    <section id="inicio" className="w-full relative flex flex-col items-center pt-32 md:pt-40 pb-8 md:pb-12 px-6 overflow-hidden">
-      
-      {/* Subtle top left ambient light */}
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[var(--color-secondary)]/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+    <section
+      ref={containerRef}
+      id="inicio"
+      className="relative w-full overflow-hidden"
+      style={{ height: "100svh", minHeight: "600px", background: "var(--color-bg)" }}
+    >
+      {/* ── Full-screen background image ── */}
+      <div
+        ref={imageRef}
+        className="absolute inset-0"
+        style={{ willChange: "transform" }}
+      >
+        <Image
+          src="/images/hero_created.png"
+          alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Hide bottom-right watermark */}
+        <div className="absolute bottom-0 right-0 w-[15vw] max-w-[200px] h-[8vh] max-h-[80px] bg-gradient-to-tl from-[#Eae8e6] via-[#Eae8e6]/80 to-transparent z-[1]" />
+        {/* Desktop: left fade into bg */}
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background: `linear-gradient(
+              to right,
+              var(--color-bg) 0%,
+              rgba(253,248,248,0.9) 20%,
+              rgba(253,248,248,0.4) 45%,
+              transparent 70%
+            )`,
+          }}
+        />
+        {/* Mobile: overlay for readability */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background: `linear-gradient(
+              to bottom,
+              rgba(253,248,248,0.80) 0%,
+              rgba(253,248,248,0.55) 35%,
+              rgba(253,248,248,0.65) 70%,
+              rgba(253,248,248,0.85) 100%
+            )`,
+          }}
+        />
+      </div>
 
-      <div ref={containerRef} className="w-full max-w-[1200px] flex flex-col items-center justify-center text-center z-10 relative">
+      {/* Scroll darken overlay */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 bg-black pointer-events-none z-[2]"
+        style={{ opacity: 0 }}
+      />
+
+      {/* ── Content Layer ── */}
+      <div className="relative z-10 h-full flex flex-col justify-between px-5 sm:px-8 md:px-12 lg:px-20 max-w-none w-full">
         
-        {/* Subtle Overline Content */}
-        <p className="hero-element text-xs md:text-sm uppercase tracking-[0.2em] mb-6 font-medium" style={{ color: "var(--color-primary)" }}>
-          Made with Love in Texas
-        </p>
+        {/* Spacer for navbar */}
+        <div className="pt-24 sm:pt-28 md:pt-36" />
 
-        {/* Elegant Heading — Single Line */}
-        <div className="hero-element relative inline-block">
-          {/* Decorative Sparkle */}
-          <svg 
-            ref={sparkleRef}
-            className="absolute -top-4 -right-8 md:-top-6 md:-right-12 w-8 md:w-12 h-8 md:h-12 opacity-80" 
-            style={{ color: "var(--color-accent)" }}
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="1"
-          >
-            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" opacity="0.3" />
-          </svg>
+        {/* Main content */}
+        <div className="hero-content-block flex-1 flex flex-col justify-center max-w-[800px]">
           
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl sm:text-6xl md:text-8xl lg:text-[110px] font-normal italic leading-[1] mb-6 tracking-tight whitespace-nowrap">
-            Cakes <span className="text-[var(--color-primary)] relative">
-              By Yas.
+          {/* Overline */}
+          <p
+            className="hero-overline text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.3em] mb-5 sm:mb-6 md:mb-8 font-medium"
+            style={{ color: "var(--color-primary)" }}
+          >
+            Artisan Cake Boutique · Spring, TX
+          </p>
+
+          {/* Title — Brand Name as Hero */}
+          <div className="mb-4 md:mb-5">
+            <h1>
+              <span
+                className="hero-title-line block font-[family-name:var(--font-heading)] text-[clamp(2.5rem,7vw,6.5rem)] font-normal italic leading-[0.95] tracking-tight whitespace-nowrap"
+                style={{ color: "var(--color-text)" }}
+              >
+                Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
+              </span>
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <p
+            className="hero-subtitle text-[13px] sm:text-sm md:text-base max-w-[360px] leading-relaxed mb-7 sm:mb-8 md:mb-10"
+            style={{ color: "var(--color-text-muted)", letterSpacing: "0.02em" }}
+          >
+            Handcrafted celebration cakes and bespoke pastry design,
+            made with love to elevate your most unforgettable moments.
+          </p>
+
+          {/* CTA — Outline Button */}
+          <div className="hero-cta flex flex-wrap gap-4">
+            <a
+              href="#pasteles"
+              className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+              style={{
+                color: "var(--color-text)",
+                borderColor: "var(--color-text)",
+                background: "transparent",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--color-text)";
+                e.currentTarget.style.color = "var(--color-bg)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--color-text)";
+              }}
+            >
+              Our Creations
+            </a>
+            <a
+              href="#menu"
+              className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+              style={{
+                color: "var(--color-bg)",
+                borderColor: "var(--color-primary)",
+                background: "var(--color-primary)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--color-primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "var(--color-primary)";
+                e.currentTarget.style.color = "var(--color-bg)";
+              }}
+            >
+              Our Menu
+            </a>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="hero-bottom pb-6 sm:pb-8 md:pb-12 flex items-end justify-between">
+          {/* Scroll indicator */}
+          <div className="flex items-center gap-2.5 opacity-50">
+            <div className="w-px h-8 sm:h-10 bg-current animate-pulse" style={{ color: "var(--color-text-muted)" }} />
+            <span
+              className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium"
+              style={{ color: "var(--color-text-muted)", writingMode: "vertical-lr" }}
+            >
+              Scroll
             </span>
-          </h1>
-        </div>
-
-        {/* Description */}
-        <p className="hero-element text-base md:text-lg max-w-[500px] mx-auto mb-8 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-          Handcrafted cakes and passionate pastry design to elevate your most unforgettable moments.
-        </p>
-
-        {/* Primary CTA */}
-        <div className="hero-element flex items-center justify-center mb-10 md:mb-12">
-          <a
-            href="#pasteles"
-            className="px-8 py-3.5 text-[13px] md:text-sm font-bold uppercase tracking-widest text-[#FBF7F4] rounded-full shadow-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style={{ background: "var(--color-primary)" }}
-          >
-            View Menu
-          </a>
-        </div>
-
-        {/* Hero Image Presentation */}
-        <div className="relative w-full max-w-[1000px] mt-2 md:mt-4">
-          {/* Ambient Glow behind image */}
-          <div 
-            ref={glowRef}
-            className="absolute inset-0 bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] opacity-20 blur-[60px] rounded-[3rem] -z-10"
-          />
-          
-          <div 
-            ref={imageWrapperRef}
-            className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[2/1] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-image border border-white/40"
-          >
-            <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none mix-blend-multiply" />
-            <Image
-              src="/images/hero-cake-new.jpeg"
-              alt="Artisanal custom cake by Cakes by Yas"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
-              className="object-cover object-center transition-transform duration-[10s] hover:scale-105"
-            />
           </div>
 
-          {/* Rotating Premium Badge */}
-          <div className="hero-element absolute -bottom-4 -right-2 md:bottom-4 md:-right-4 z-20 w-28 h-28 md:w-36 md:h-36 pointer-events-none drop-shadow-2xl bg-white/40 backdrop-blur-md rounded-full p-2 border border-white/60">
-            <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_12s_linear_infinite]">
-              <path id="curve" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="transparent" />
-              <text fontSize="11" fontWeight="bold" letterSpacing="1.8" fill="var(--color-primary)" className="uppercase">
-                <textPath href="#curve" startOffset="0%">
-                  100% CUSTOM DESIGN • MADE WITH LOVE • 
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl md:text-3xl drop-shadow-sm">✨</span>
-            </div>
-          </div>
+          {/* Location stamp */}
+          <p
+            className="hidden sm:block text-[9px] md:text-[10px] uppercase tracking-[0.2em] opacity-40"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Made with Love · Spring &amp; The Woodlands, Texas
+          </p>
         </div>
-        
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import SignatureCreations from "@/components/SignatureCreations";
 import PricingMenu from "@/components/PricingMenu";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SectionDivider variant="aurora" />
+      <SignatureCreations />
       <PricingMenu />
       <SectionDivider variant="ribbon" />
       <About />

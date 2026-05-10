@@ -124,7 +124,7 @@ export default function Hero() {
         {/* Top: Image Block — cropped to the beautiful part */}
         <div ref={imageRef} className="relative w-full" style={{ height: '50svh', minHeight: '280px' }}>
           <Image
-            src="/images/hero_created.png"
+            src="/images/hero_created_hq.jpg"
             alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
             fill
             priority
@@ -210,7 +210,7 @@ export default function Hero() {
           style={{ willChange: "transform" }}
         >
           <Image
-            src="/images/hero_created.png"
+            src="/images/hero_created_hq.jpg"
             alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
             fill
             priority

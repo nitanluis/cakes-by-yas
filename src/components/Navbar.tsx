@@ -48,19 +48,19 @@ export default function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex items-center justify-between">
         
-        {/* Spacer for mobile to balance flex layout with hamburger */}
-        <div className="md:hidden w-8 h-8"></div>
+        {/* Spacer for mobile to balance flex layout with hamburger perfectly */}
+        <div className="md:hidden w-[40px] shrink-0"></div>
 
-        {/* Logo - Centered on mobile (shifted slightly left to balance the icon weight), left-aligned on desktop */}
+        {/* Logo - Centered via flexbox on mobile, left-aligned on desktop */}
         <Link 
           href="/" 
-          className="absolute left-1/2 -translate-x-[53%] md:static md:translate-x-0 flex items-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
+          className="flex items-center justify-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
         >
           <img 
             src="/isotipo.png" 
             alt="Cakes By Yas Icon" 
             className="w-12 h-12 md:w-14 md:h-14 object-contain"
-            style={{ mixBlendMode: 'darken' }}
+            style={{ mixBlendMode: 'multiply' }}
           />
           <span
             className="font-[family-name:var(--font-heading)] italic font-semibold text-[7vw] sm:text-2xl lg:text-3xl whitespace-nowrap"
@@ -114,11 +114,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Hamburger — Thicker (h-[2px]) and slightly wider (w-7) */}
+        {/* Mobile Hamburger — Fixed width to perfectly balance the logo centering */}
         <button
           id="mobile-menu-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-2 p-2 shrink-0 z-50 relative"
+          className="md:hidden flex flex-col items-end justify-center gap-2 w-[40px] shrink-0 z-50 relative"
           aria-label="Toggle menu"
         >
           <span

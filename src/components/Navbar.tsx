@@ -51,15 +51,16 @@ export default function Navbar() {
         {/* Spacer for mobile to balance flex layout with hamburger */}
         <div className="md:hidden w-8 h-8"></div>
 
-        {/* Logo - Absolute centered on mobile, left-aligned on desktop */}
+        {/* Logo - Centered on mobile (shifted slightly left to balance the icon weight), left-aligned on desktop */}
         <Link 
           href="/" 
-          className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
+          className="absolute left-1/2 -translate-x-[53%] md:static md:translate-x-0 flex items-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
         >
           <img 
             src="/isotipo.png" 
             alt="Cakes By Yas Icon" 
-            className="w-12 h-12 md:w-14 md:h-14 object-contain mix-blend-multiply"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain"
+            style={{ mixBlendMode: 'darken' }}
           />
           <span
             className="font-[family-name:var(--font-heading)] italic font-semibold text-[7vw] sm:text-2xl lg:text-3xl whitespace-nowrap"
@@ -113,28 +114,28 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Hamburger — Thicker (h-[2px]) and slightly wider (w-7) */}
         <button
           id="mobile-menu-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2 shrink-0"
+          className="md:hidden flex flex-col gap-2 p-2 shrink-0 z-50 relative"
           aria-label="Toggle menu"
         >
           <span
-            className={`h-px w-6 transition-all duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-[7px]" : ""
+            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
+              mobileOpen ? "rotate-45 translate-y-[10px]" : ""
             }`}
             style={{ background: "var(--color-text)" }}
           />
           <span
-            className={`h-px w-6 transition-all duration-300 ${
+            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
               mobileOpen ? "opacity-0" : ""
             }`}
             style={{ background: "var(--color-text)" }}
           />
           <span
-            className={`h-px w-6 transition-all duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
+            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
+              mobileOpen ? "-rotate-45 -translate-y-[10px]" : ""
             }`}
             style={{ background: "var(--color-text)" }}
           />

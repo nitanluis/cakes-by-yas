@@ -45,69 +45,66 @@ export default function Hero() {
       opacity: 0,
       duration: 0.7,
     }, "-=0.5")
-    // Image reveal
+    // Image reveal (both mobile and desktop)
     .from(imageRef.current, {
-      scale: 1.1,
+      scale: 1.05,
       opacity: 0,
       duration: 1.6,
       ease: "power2.out",
-    }, 0.1)
-    // Bottom bar
-    .from(".hero-bottom", {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-    }, "-=0.4");
+    }, 0.1);
 
-    // ── Scroll-driven parallax ──
-    // Gentle image parallax
-    gsap.to(imageRef.current, {
-      y: -60,
-      scale: 1.04,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    // ── Desktop-only scroll-driven parallax ──
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      // Gentle image parallax
+      gsap.to(".hero-desktop-image", {
+        y: -60,
+        scale: 1.04,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
 
-    // Content fades out as user scrolls
-    gsap.to(".hero-content-block", {
-      y: -40,
-      opacity: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "10% top",
-        end: "50% top",
-        scrub: true,
-      },
-    });
+      // Content fades out as user scrolls
+      gsap.to(".hero-content-block", {
+        y: -40,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "10% top",
+          end: "50% top",
+          scrub: true,
+        },
+      });
 
-    // Bottom bar fades
-    gsap.to(".hero-bottom", {
-      opacity: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "5% top",
-        end: "25% top",
-        scrub: true,
-      },
-    });
+      // Bottom bar fades
+      gsap.to(".hero-bottom", {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "5% top",
+          end: "25% top",
+          scrub: true,
+        },
+      });
 
-    // Subtle darken
-    gsap.to(overlayRef.current, {
-      opacity: 0.25,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
+      // Subtle darken
+      gsap.to(overlayRef.current, {
+        opacity: 0.25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     });
 
   }, { scope: containerRef });
@@ -117,81 +114,48 @@ export default function Hero() {
       ref={containerRef}
       id="inicio"
       className="relative w-full overflow-hidden"
-      style={{ height: "100svh", minHeight: "600px", background: "var(--color-bg)" }}
+      style={{ background: "var(--color-bg)" }}
     >
-      {/* ── Full-screen background image ── */}
-      <div
-        ref={imageRef}
-        className="absolute inset-0"
-        style={{ willChange: "transform" }}
-      >
-        <Image
-          src="/images/hero_created.png"
-          alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Hide bottom-right watermark */}
-        <div className="absolute bottom-0 right-0 w-[15vw] max-w-[200px] h-[8vh] max-h-[80px] bg-gradient-to-tl from-[#Eae8e6] via-[#Eae8e6]/80 to-transparent z-[1]" />
-        {/* Desktop: left fade into bg */}
-        <div
-          className="absolute inset-0 hidden md:block"
-          style={{
-            background: `linear-gradient(
-              to right,
-              var(--color-bg) 0%,
-              rgba(253,248,248,0.9) 20%,
-              rgba(253,248,248,0.4) 45%,
-              transparent 70%
-            )`,
-          }}
-        />
-        {/* Mobile: overlay for readability */}
-        <div
-          className="absolute inset-0 md:hidden"
-          style={{
-            background: `linear-gradient(
-              to bottom,
-              rgba(253,248,248,0.80) 0%,
-              rgba(253,248,248,0.55) 35%,
-              rgba(253,248,248,0.65) 70%,
-              rgba(253,248,248,0.85) 100%
-            )`,
-          }}
-        />
-      </div>
-
-      {/* Scroll darken overlay */}
-      <div
-        ref={overlayRef}
-        className="absolute inset-0 bg-black pointer-events-none z-[2]"
-        style={{ opacity: 0 }}
-      />
-
-      {/* ── Content Layer ── */}
-      <div className="relative z-10 h-full flex flex-col justify-between px-5 sm:px-8 md:px-12 lg:px-20 max-w-none w-full">
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* MOBILE HERO — Editorial Split Layout                   */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <div className="md:hidden flex flex-col" style={{ minHeight: '100svh' }}>
         
-        {/* Spacer for navbar */}
-        <div className="pt-24 sm:pt-28 md:pt-36" />
+        {/* Top: Image Block — cropped to the beautiful part */}
+        <div ref={imageRef} className="relative w-full" style={{ height: '50svh', minHeight: '280px' }}>
+          <Image
+            src="/images/hero_created.png"
+            alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[70%_35%]"
+          />
+          {/* Soft fade to background at bottom */}
+          <div 
+            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+            style={{
+              background: `linear-gradient(to bottom, transparent, var(--color-bg))`,
+            }}
+          />
+        </div>
 
-        {/* Main content */}
-        <div className="hero-content-block flex-1 flex flex-col justify-center max-w-[800px]">
+        {/* Bottom: Brand Content Block */}
+        <div className="flex-1 flex flex-col justify-center px-6 pb-8 pt-2" style={{ background: 'var(--color-bg)' }}>
           
           {/* Overline */}
           <p
-            className="hero-overline text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.3em] mb-5 sm:mb-6 md:mb-8 font-medium"
+            className="hero-overline text-[10px] uppercase tracking-[0.3em] mb-4 font-medium"
             style={{ color: "var(--color-primary)" }}
           >
-            Artisan Cake Boutique · Spring, TX
+            Artisan Cake Studio · Spring, TX
           </p>
 
-          {/* Title — Brand Name as Hero */}
-          <div className="mb-4 md:mb-5">
+          {/* Title — Large Brand Name */}
+          <div className="mb-3">
             <h1>
               <span
-                className="hero-title-line block font-[family-name:var(--font-heading)] text-[clamp(2.5rem,7vw,6.5rem)] font-normal italic leading-[0.95] tracking-tight whitespace-nowrap"
+                className="hero-title-line block font-[family-name:var(--font-heading)] text-[2.8rem] font-normal italic leading-[0.95] tracking-tight"
                 style={{ color: "var(--color-text)" }}
               >
                 Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
@@ -201,76 +165,184 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p
-            className="hero-subtitle text-[13px] sm:text-sm md:text-base max-w-[360px] leading-relaxed mb-7 sm:mb-8 md:mb-10"
+            className="hero-subtitle text-[13px] max-w-[320px] leading-relaxed mb-6"
             style={{ color: "var(--color-text-muted)", letterSpacing: "0.02em" }}
           >
             Handcrafted celebration cakes and bespoke pastry design,
             made with love to elevate your most unforgettable moments.
           </p>
 
-          {/* CTA — Outline Button */}
-          <div className="hero-cta flex flex-wrap gap-4">
+          {/* CTA Buttons */}
+          <div className="hero-cta flex gap-3">
             <a
               href="#pasteles"
-              className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation"
               style={{
                 color: "var(--color-text)",
                 borderColor: "var(--color-text)",
                 background: "transparent",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--color-text)";
-                e.currentTarget.style.color = "var(--color-bg)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = "var(--color-text)";
               }}
             >
               Our Creations
             </a>
             <a
               href="#menu"
-              className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation"
               style={{
                 color: "var(--color-bg)",
                 borderColor: "var(--color-primary)",
                 background: "var(--color-primary)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = "var(--color-primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "var(--color-primary)";
-                e.currentTarget.style.color = "var(--color-bg)";
               }}
             >
               Our Menu
             </a>
           </div>
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="hero-bottom pb-6 sm:pb-8 md:pb-12 flex items-end justify-between">
-          {/* Scroll indicator */}
-          <div className="flex items-center gap-2.5 opacity-50">
-            <div className="w-px h-8 sm:h-10 bg-current animate-pulse" style={{ color: "var(--color-text-muted)" }} />
-            <span
-              className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium"
-              style={{ color: "var(--color-text-muted)", writingMode: "vertical-lr" }}
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* DESKTOP HERO — Full-screen immersive background        */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <div className="hidden md:block" style={{ height: "100svh", minHeight: "600px" }}>
+        {/* Full-screen background image */}
+        <div
+          className="hero-desktop-image absolute inset-0"
+          style={{ willChange: "transform" }}
+        >
+          <Image
+            src="/images/hero_created.png"
+            alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* Hide bottom-right watermark */}
+          <div className="absolute bottom-0 right-0 w-[15vw] max-w-[200px] h-[8vh] max-h-[80px] bg-gradient-to-tl from-[#Eae8e6] via-[#Eae8e6]/80 to-transparent z-[1]" />
+          {/* Left fade into bg */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(
+                to right,
+                var(--color-bg) 0%,
+                rgba(253,248,248,0.9) 20%,
+                rgba(253,248,248,0.4) 45%,
+                transparent 70%
+              )`,
+            }}
+          />
+        </div>
+
+        {/* Scroll darken overlay */}
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 bg-black pointer-events-none z-[2]"
+          style={{ opacity: 0 }}
+        />
+
+        {/* Content Layer */}
+        <div className="relative z-10 h-full flex flex-col justify-between px-12 lg:px-20 max-w-none w-full">
+          
+          {/* Spacer for navbar */}
+          <div className="pt-36" />
+
+          {/* Main content */}
+          <div className="hero-content-block flex-1 flex flex-col justify-center max-w-[800px]">
+            
+            {/* Overline */}
+            <p
+              className="hero-overline text-xs uppercase tracking-[0.3em] mb-8 font-medium"
+              style={{ color: "var(--color-primary)" }}
             >
-              Scroll
-            </span>
+              Artisan Cake Studio · Spring, TX
+            </p>
+
+            {/* Title */}
+            <div className="mb-5">
+              <h1>
+                <span
+                  className="hero-title-line block font-[family-name:var(--font-heading)] text-[clamp(3rem,7vw,6.5rem)] font-normal italic leading-[0.95] tracking-tight whitespace-nowrap"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
+                </span>
+              </h1>
+            </div>
+
+            {/* Subtitle */}
+            <p
+              className="hero-subtitle text-base max-w-[360px] leading-relaxed mb-10"
+              style={{ color: "var(--color-text-muted)", letterSpacing: "0.02em" }}
+            >
+              Handcrafted celebration cakes and bespoke pastry design,
+              made with love to elevate your most unforgettable moments.
+            </p>
+
+            {/* CTA */}
+            <div className="hero-cta flex flex-wrap gap-4">
+              <a
+                href="#pasteles"
+                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+                style={{
+                  color: "var(--color-text)",
+                  borderColor: "var(--color-text)",
+                  background: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--color-text)";
+                  e.currentTarget.style.color = "var(--color-bg)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "var(--color-text)";
+                }}
+              >
+                Our Creations
+              </a>
+              <a
+                href="#menu"
+                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+                style={{
+                  color: "var(--color-bg)",
+                  borderColor: "var(--color-primary)",
+                  background: "var(--color-primary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "var(--color-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "var(--color-primary)";
+                  e.currentTarget.style.color = "var(--color-bg)";
+                }}
+              >
+                Our Menu
+              </a>
+            </div>
           </div>
 
-          {/* Location stamp */}
-          <p
-            className="hidden sm:block text-[9px] md:text-[10px] uppercase tracking-[0.2em] opacity-40"
-            style={{ color: "var(--color-text-muted)" }}
-          >
-            Made with Love · Spring &amp; The Woodlands, Texas
-          </p>
+          {/* Bottom bar */}
+          <div className="hero-bottom pb-12 flex items-end justify-between">
+            {/* Scroll indicator */}
+            <div className="flex items-center gap-2.5 opacity-50">
+              <div className="w-px h-10 bg-current animate-pulse" style={{ color: "var(--color-text-muted)" }} />
+              <span
+                className="text-[10px] uppercase tracking-[0.2em] font-medium"
+                style={{ color: "var(--color-text-muted)", writingMode: "vertical-lr" }}
+              >
+                Scroll
+              </span>
+            </div>
+
+            {/* Location stamp */}
+            <p
+              className="text-[10px] uppercase tracking-[0.2em] opacity-40"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              Made with Love · Spring &amp; The Woodlands, Texas
+            </p>
+          </div>
         </div>
       </div>
     </section>

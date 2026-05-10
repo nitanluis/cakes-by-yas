@@ -59,7 +59,7 @@ export default function Navbar() {
           <img 
             src="/isotipo.png" 
             alt="Cakes By Yas Icon" 
-            className="w-10 h-10 md:w-14 md:h-14 object-contain"
+            className="w-10 h-10 md:w-14 md:h-14 object-contain mix-blend-multiply"
           />
           <span
             className="font-[family-name:var(--font-heading)] italic font-semibold text-xl sm:text-2xl lg:text-3xl whitespace-nowrap"

@@ -131,17 +131,17 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover object-[70%_35%]"
           />
-          {/* Soft fade to background at bottom */}
+          {/* Soft fade to background at bottom — tall for seamless blend */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
             style={{
-              background: `linear-gradient(to bottom, transparent, var(--color-bg))`,
+              background: `linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%)`,
             }}
           />
         </div>
 
-        {/* Bottom: Brand Content Block */}
-        <div className="flex-1 flex flex-col justify-center px-6 pb-8 pt-2" style={{ background: 'var(--color-bg)' }}>
+        {/* Bottom: Brand Content Block — pulled up into image fade for unity */}
+        <div className="flex-1 flex flex-col justify-center px-5 pb-8 -mt-24 relative z-10">
           
           {/* Overline */}
           <p
@@ -155,7 +155,7 @@ export default function Hero() {
           <div className="mb-3">
             <h1>
               <span
-                className="hero-title-line block font-[family-name:var(--font-heading)] text-[2.8rem] font-normal italic leading-[0.95] tracking-tight"
+                className="hero-title-line block font-[family-name:var(--font-heading)] text-[13vw] font-normal italic leading-[0.9] tracking-tight"
                 style={{ color: "var(--color-text)" }}
               >
                 Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
@@ -174,9 +174,10 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="hero-cta flex gap-3">
-            <a
-              href="#pasteles"
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation"
+            <button
+              type="button"
+              onClick={() => document.getElementById('pasteles')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer"
               style={{
                 color: "var(--color-text)",
                 borderColor: "var(--color-text)",
@@ -184,10 +185,11 @@ export default function Hero() {
               }}
             >
               Our Creations
-            </a>
-            <a
-              href="#menu"
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation"
+            </button>
+            <button
+              type="button"
+              onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer"
               style={{
                 color: "var(--color-bg)",
                 borderColor: "var(--color-primary)",
@@ -195,7 +197,7 @@ export default function Hero() {
               }}
             >
               Our Menu
-            </a>
+            </button>
           </div>
         </div>
       </div>

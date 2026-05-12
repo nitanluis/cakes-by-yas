@@ -15,6 +15,7 @@ export default function BentoGrid() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // 1. Entrance Fade & Slide Up Stagger
       const blocks = gsap.utils.toArray<HTMLElement>(".bento-block");
       blocks.forEach((block, i) => {
         gsap.fromTo(
@@ -35,6 +36,27 @@ export default function BentoGrid() {
             force3D: true,
           }
         );
+      });
+
+      // 2. Cinematic Parallax Float Effect on Images (Desktop & Tablet)
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 640px)", () => {
+        const images = gsap.utils.toArray<HTMLElement>(".bento-block img");
+        images.forEach((img) => {
+          gsap.fromTo(img, 
+            { yPercent: -6 },
+            {
+              yPercent: 6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              }
+            }
+          );
+        });
       });
     }, gridRef);
 

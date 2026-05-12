@@ -168,8 +168,15 @@ export default function SignatureCreations() {
           
           {/* Header */}
           <div className="creations-header text-center mb-12 md:mb-16">
-            <h2 className="font-[family-name:var(--font-heading)] italic text-4xl sm:text-5xl md:text-6xl mb-4" style={{ color: "var(--color-text)" }}>
+            <h2 className="relative inline-block font-[family-name:var(--font-heading)] italic text-4xl sm:text-5xl md:text-6xl mb-4" style={{ color: "var(--color-text)" }}>
               Signature Creations
+              {/* Magic Sparkles */}
+              <svg className="absolute -top-1.5 -left-5 w-4 h-4 text-[var(--color-primary)] fill-current sparkle-animate-2" viewBox="0 0 24 24">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+              </svg>
+              <svg className="absolute -bottom-1 -right-5 w-3.5 h-3.5 text-[var(--color-secondary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+              </svg>
             </h2>
             <p className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "var(--color-primary)" }}>
               Edible Works of Art

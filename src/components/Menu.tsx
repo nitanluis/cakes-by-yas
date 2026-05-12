@@ -80,8 +80,15 @@ export default function Menu() {
           className="w-full max-w-[1200px]"
         >
           <div ref={titleRef} className="text-center mb-16 pt-8">
-            <h2 className="font-[family-name:var(--font-heading)] italic text-5xl md:text-7xl tracking-tight mb-4" style={{ color: "var(--color-text)" }}>
+            <h2 className="relative inline-block font-[family-name:var(--font-heading)] italic text-5xl md:text-7xl tracking-tight mb-4" style={{ color: "var(--color-text)" }}>
               The Menu
+              {/* Magic Sparkles */}
+              <svg className="absolute -top-2 -left-6 w-4 h-4 text-[var(--color-primary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+              </svg>
+              <svg className="absolute -bottom-1 -right-6 w-3 h-3 text-[var(--color-secondary)] fill-current sparkle-animate-2" viewBox="0 0 24 24">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+              </svg>
             </h2>
             <p className="text-sm md:text-base uppercase tracking-[0.1em] font-medium" style={{ color: "var(--color-primary)" }}>
               Edible works of art

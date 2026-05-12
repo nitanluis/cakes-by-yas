@@ -158,7 +158,12 @@ export default function Hero() {
                 className="hero-title-line block font-[family-name:var(--font-heading)] text-[13vw] font-normal italic leading-[0.9] tracking-tight"
                 style={{ color: "var(--color-text)" }}
               >
-                Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
+                Cakes By <span className="relative inline-block" style={{ color: "var(--color-primary)" }}>
+                  Yas.
+                  <svg className="absolute -top-1 -right-4 w-4 h-4 text-[var(--color-primary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
+                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+                  </svg>
+                </span>
               </span>
             </h1>
           </div>
@@ -267,7 +272,12 @@ export default function Hero() {
                   className="hero-title-line block font-[family-name:var(--font-heading)] text-[clamp(3rem,7vw,6.5rem)] font-normal italic leading-[0.95] tracking-tight whitespace-nowrap"
                   style={{ color: "var(--color-text)" }}
                 >
-                  Cakes By <span style={{ color: "var(--color-primary)" }}>Yas.</span>
+                  Cakes By <span className="relative inline-block" style={{ color: "var(--color-primary)" }}>
+                    Yas.
+                    <svg className="absolute -top-3 -right-6 w-6 h-6 text-[var(--color-primary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
+                      <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+                    </svg>
+                  </span>
                 </span>
               </h1>
             </div>

@@ -30,12 +30,18 @@ const NavLink = ({ label, href }: { label: string; href: string }) => (
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 150);
+      
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -188,6 +194,12 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      
+      {/* Scroll Progress Line — "Hilo de Seda" */}
+      <div 
+        className="absolute bottom-0 left-0 h-[1.5px] bg-[var(--color-primary)] transition-all duration-100 ease-out z-50"
+        style={{ width: `${scrollProgress}%` }}
+      />
     </nav>
   );
 }

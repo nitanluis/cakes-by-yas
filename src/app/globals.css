@@ -309,3 +309,26 @@ a.ig-pill:hover .ig-text {
     scroll-behavior: auto !important;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   MAGIC SPARKLE EFFECTS ✨ (DESTELLO DE AZÚCAR)
+   ═══════════════════════════════════════════════ */
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    transform: scale(0.3) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(234, 103, 125, 0.5));
+  }
+}
+
+.sparkle-animate-1 {
+  animation: sparkle-twinkle 3.5s ease-in-out infinite;
+}
+
+.sparkle-animate-2 {
+  animation: sparkle-twinkle 4.5s ease-in-out infinite 1.5s;
+}

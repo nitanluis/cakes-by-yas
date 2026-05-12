@@ -14,6 +14,10 @@ Bienvenido al repositorio oficial de **Cakes by Yas**, una landing page premium 
 - **Rendimiento Móvil de Élite (60+ FPS):** Optimizaciones avanzadas de renderizado en GPU (desenfoques estáticos de capas, remoción de escuchadores JS en scroll, desactivación de retrasos táctiles) para una navegación totalmente fluida en iOS y Android.
 - **Estilizado de Vanguardia:** Implementación de **Tailwind CSS v4** para un sistema de diseño rápido y flexible.
 - **Navegación Intuitiva:** Rediseño del menú hamburguesa en modo móvil (estilo asimétrico y animado en coral rosa) y botón de regreso al inicio integrado en el logotipo.
+- **Detalles de Alta Costura (Efectos de Lujo):**
+  - **"Hilo de Seda":** Una delicada línea de progreso de lectura rosa coral en tiempo real que recorre la base de la navegación fija.
+  - **"Destello de Azúcar" (Twinkling Sparkles):** Estrellas de estilo boutique vectorizadas (SVG) que giran y parpadean sutilmente en los encabezados principales (*"Cakes By Yas."*, *"The Menu"*, *"Signature Creations"*).
+  - **"Micro-Paralaje Chiffon":** Efecto de paralaje cinematográfico suave en el Bento Grid de creaciones que hace que los pasteles parezcan flotar sobre la pantalla al desplazarse.
 
 ## 🚀 Tecnologías Utilizadas
 

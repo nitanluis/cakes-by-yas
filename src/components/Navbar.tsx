@@ -48,6 +48,8 @@ export default function Navbar() {
   const handleLogoClick = (e: React.MouseEvent) => {
     if (typeof window !== "undefined" && window.location.pathname === "/") {
       e.preventDefault();
+      // Clear trailing URL hashes cleanly without forcing a page reload
+      window.history.pushState(null, "", "/");
       window.scrollTo({ top: 0, behavior: "smooth" });
       setMobileOpen(false);
     }

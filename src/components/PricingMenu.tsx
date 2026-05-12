@@ -163,11 +163,14 @@ export default function PricingMenu() {
     const size = selectedSizes[item.id];
     const filling = selectedFillings[item.id];
     
-    let msg = `Hola Yas! I'd like to order a ${item.name}.`;
-    if (size) msg += `\nSize: ${size.label} (${size.price})`;
-    if (filling) msg += `\nFlavor/Filling: ${filling}`;
+    let msg = `*--- NEW ORDER INQUIRY ---*\n\n` +
+      `Hola Yas! I'd like to order a *${item.name}* from your menu.\n\n` +
+      `*Order Details:*\n`;
+      
+    if (size) msg += `- *Size:* ${size.label} (${size.price})\n`;
+    if (filling) msg += `- *Flavor/Filling:* ${filling}\n`;
     
-    msg += `\nCan you give me more details?`;
+    msg += `\nCan you please provide me with more details? Thank you!`;
     return encodeURIComponent(msg);
   };
 

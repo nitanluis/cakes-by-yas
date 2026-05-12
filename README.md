@@ -8,10 +8,12 @@ Bienvenido al repositorio oficial de **Cakes by Yas**, una landing page premium 
 
 - **Diseño Ultra-Premium:** Estética sofisticada orientada a la alta repostería.
 - **Animaciones Fluídas:** Experiencia de usuario inmersiva utilizando **GSAP** (GreenSock Animation Platform) para transiciones y efectos de scroll.
-- **Arquitectura Moderna:** Desarrollado con **Next.js 15+** y **React 19** para un rendimiento óptimo y SEO amigable.
+- **Arquitectura Moderna:** Desarrollado con **Next.js 16 (React 19)** con renderizado en el servidor (RSC) para un rendimiento óptimo.
+- **Metadatos y Open Graph Dinámicos:** Generación dinámica de tarjetas y previsualizaciones de enlaces en WhatsApp e iMessage con la imagen y descripción real de cada pastel.
+- **Deep Linking Interactivo:** Al hacer clic en un enlace de consulta de producto, la web hace scroll automático y despliega el modal interactivo correspondiente.
+- **Rendimiento Móvil de Élite (60+ FPS):** Optimizaciones avanzadas de renderizado en GPU (desenfoques estáticos de capas, remoción de escuchadores JS en scroll, desactivación de retrasos táctiles) para una navegación totalmente fluida en iOS y Android.
 - **Estilizado de Vanguardia:** Implementación de **Tailwind CSS v4** para un sistema de diseño rápido y flexible.
-- **Totalmente Responsivo:** Optimizado para una visualización perfecta en dispositivos móviles, tablets y escritorio.
-- **Interacción Directa:** Integración con WhatsApp e Instagram para facilitar pedidos y consultas.
+- **Navegación Intuitiva:** Rediseño del menú hamburguesa en modo móvil (estilo asimétrico y animado en coral rosa) y botón de regreso al inicio integrado en el logotipo.
 
 ## 🚀 Tecnologías Utilizadas
 

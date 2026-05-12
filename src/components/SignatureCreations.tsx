@@ -21,8 +21,28 @@ type CreationItem = {
 export default function SignatureCreations() {
   const containerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<CreationItem | null>(null);
+
+  // Auto-open modal and scroll to section if "cake" search param is present in URL
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const cakeId = params.get("cake");
+    if (cakeId) {
+      const item = productsData.find((p) => p.id === cakeId);
+      if (item) {
+        // We delay slightly to let GSAP/Hydration settle and ensure elements exist
+        const timer = setTimeout(() => {
+          setSelectedItem(item);
+          const element = document.getElementById("pasteles");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
 
   useGSAP(() => {
     // Section header entrance
@@ -42,15 +62,24 @@ export default function SignatureCreations() {
     const cards = containerRef.current.querySelectorAll(".creation-card");
     if (cards.length === 0) return;
 
+    // Set initial state immediately to avoid FOUC (flash of unstyled content)
+    gsap.set(cards, { y: 30, opacity: 0, scale: 0.98 });
+
     ScrollTrigger.batch(cards, {
       onEnter: (elements) => {
-        gsap.fromTo(
-          elements,
-          { y: 40, opacity: 0, scale: 0.97 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.7, stagger: 0.08, ease: "power2.out" }
-        );
+        gsap.to(elements, {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.08,
+          ease: "power3.out",
+          overwrite: "auto",
+          clearProps: "opacity,transform"
+        });
       },
       start: "top 90%",
+      once: true
     });
   }, { scope: containerRef });
 
@@ -59,8 +88,8 @@ export default function SignatureCreations() {
     if (selectedItem) {
       gsap.fromTo(
         modalRef.current,
-        { opacity: 0, backdropFilter: "blur(0px)" },
-        { opacity: 1, backdropFilter: "blur(12px)", duration: 0.4, ease: "power2.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: "power2.out" }
       );
       gsap.fromTo(
         ".modal-content",
@@ -73,7 +102,6 @@ export default function SignatureCreations() {
   const closeModal = () => {
     gsap.to(modalRef.current, {
       opacity: 0,
-      backdropFilter: "blur(0px)",
       duration: 0.3,
       ease: "power2.in",
       onComplete: () => setSelectedItem(null)
@@ -85,14 +113,30 @@ export default function SignatureCreations() {
 
   const getOrderMessage = (item: CreationItem | null | undefined) => {
     if (item && item.id !== 'custom') {
-      const imageUrl = `${window.location.origin}${item.image}`;
-      return encodeURIComponent(`Hola Yas! I'm interested in ordering a ${item.name}.\n\nReference: ${imageUrl}\n\nCan you give me more details?`);
+      const origin = typeof window !== 'undefined' ? window.location.origin : '';
+      const shareUrl = `${origin}/?cake=${item.id}`;
+      
+      const messageText = `*--- NEW ORDER INQUIRY ---*\n\n` +
+        `Hola Yas! I am very interested in ordering one of your signature creations:\n\n` +
+        `- *Cake:* ${item.name}\n` +
+        `- *Description:* _${item.desc}_\n\n` +
+        `- *Reference Link:* ${shareUrl}\n\n` +
+        `Could you please provide me with more details and pricing? Thank you!`;
+        
+      return encodeURIComponent(messageText);
     }
-    return encodeURIComponent(`Hola Yas! I'd like to discuss a custom cake design.`);
+    
+    return encodeURIComponent(
+      `*--- CUSTOM CAKE DESIGN INQUIRY ---*\n\n` +
+      `Hola Yas! I would love to discuss a fully custom cake design for my next special occasion.\n\n` +
+      `Could you let me know how we can get started? Thank you!`
+    );
   };
 
   const handleOrder = (type: 'whatsapp' | 'sms', item?: CreationItem | null) => {
-    const msg = getOrderMessage(item);
+    const activeItem = item !== undefined ? item : selectedItem;
+    const msg = getOrderMessage(activeItem);
+    
     if (type === 'whatsapp') {
       window.open(`https://wa.me/${PHONE_NUMBER}?text=${msg}`, "_blank");
     } else {
@@ -138,14 +182,10 @@ export default function SignatureCreations() {
           {/* Interactive Gallery Grid */}
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 md:gap-6">
             {productsData.map((item) => {
-              const isHovered = hoveredId === item.id;
-              
               return (
                 <div
                   key={item.id}
-                  className="creation-card group relative rounded-2xl overflow-hidden cursor-pointer bg-white shadow-sm border border-[rgba(0,0,0,0.04)] transition-all duration-500 hover:shadow-xl hover:border-[rgba(234,103,125,0.15)]"
-                  onMouseEnter={() => setHoveredId(item.id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                  className="creation-card group relative rounded-2xl overflow-hidden cursor-pointer bg-white shadow-sm border border-[rgba(0,0,0,0.04)] transition-[box-shadow,border-color] duration-500 hover:shadow-xl hover:border-[rgba(234,103,125,0.15)]"
                   onClick={() => setSelectedItem(item)}
                 >
                   {/* Image */}
@@ -219,7 +259,7 @@ export default function SignatureCreations() {
       {selectedItem && (
         <div 
           ref={modalRef}
-          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 md:p-8 bg-black/60"
+          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 md:p-8 bg-black/60 backdrop-blur-md"
           style={{ opacity: 0 }}
           onClick={closeModal}
         >

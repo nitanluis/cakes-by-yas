@@ -39,6 +39,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (typeof window !== "undefined" && window.location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setMobileOpen(false);
+    }
+  };
+
   return (
     <nav
       id="navbar"
@@ -50,10 +58,11 @@ export default function Navbar() {
         
         {/* Spacer for mobile to balance flex layout with hamburger perfectly */}
         <div className="md:hidden w-[40px] shrink-0"></div>
-
+        
         {/* Logo - Centered via flexbox on mobile, left-aligned on desktop */}
         <Link 
           href="/" 
+          onClick={handleLogoClick}
           className="flex items-center justify-center shrink-0 w-auto flex-nowrap gap-2 md:gap-3 transition-transform duration-500 ease-elegant hover:-translate-y-0.5 hover:scale-[1.02]"
         >
           <img 
@@ -118,26 +127,26 @@ export default function Navbar() {
         <button
           id="mobile-menu-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col items-end justify-center gap-2 w-[40px] shrink-0 z-50 relative"
+          className="md:hidden flex flex-col items-end justify-center gap-2 w-[40px] shrink-0 z-50 relative group"
           aria-label="Toggle menu"
         >
           <span
-            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-[10px]" : ""
+            className={`h-[2px] rounded-full transition-all duration-300 ${
+              mobileOpen ? "w-7 rotate-45 translate-y-[10px]" : "w-7"
             }`}
-            style={{ background: "var(--color-text)" }}
+            style={{ background: "var(--color-primary)" }}
           />
           <span
-            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
-              mobileOpen ? "opacity-0" : ""
+            className={`h-[2px] rounded-full transition-all duration-300 ${
+              mobileOpen ? "w-0 opacity-0" : "w-5 group-hover:w-7"
             }`}
-            style={{ background: "var(--color-text)" }}
+            style={{ background: "var(--color-primary)" }}
           />
           <span
-            className={`h-[2px] w-7 rounded-full transition-all duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[10px]" : ""
+            className={`h-[2px] rounded-full transition-all duration-300 ${
+              mobileOpen ? "w-7 -rotate-45 -translate-y-[10px]" : "w-6 group-hover:w-7"
             }`}
-            style={{ background: "var(--color-text)" }}
+            style={{ background: "var(--color-primary)" }}
           />
         </button>
       </div>

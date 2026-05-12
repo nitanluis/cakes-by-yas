@@ -92,24 +92,7 @@ export default function Menu() {
             {MENU_ITEMS.map((item) => (
               <div
                 key={item.id}
-                className="menu-item group relative flex items-center gap-6 py-4 px-4 -mx-4 rounded-2xl cursor-pointer"
-                style={{
-                  transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.transform = "translateY(-4px) scale(1.02)";
-                  el.style.background = "rgba(255,255,255,0.7)";
-                  el.style.boxShadow = "0 8px 32px rgba(234,103,125,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(248,168,177,0.2)";
-                  el.style.backdropFilter = "blur(12px)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.transform = "translateY(0) scale(1)";
-                  el.style.background = "transparent";
-                  el.style.boxShadow = "none";
-                  el.style.backdropFilter = "none";
-                }}
+                className="menu-item group relative flex items-center gap-6 py-4 px-4 -mx-4 rounded-2xl cursor-pointer transition-all duration-500 ease-elegant md:hover:-translate-y-1 md:hover:scale-[1.01] md:hover:bg-white/70 md:hover:shadow-[0_8px_32px_rgba(234,103,125,0.08),0_2px_8px_rgba(0,0,0,0.04)] md:hover:backdrop-blur-md md:hover:ring-1 md:hover:ring-[#F8A8B1]/20"
                 onClick={() => setSelectedImage(item)}
               >
                 {/* Left accent line — appears on hover */}

@@ -58,7 +58,7 @@ export default function Contact() {
           <a 
             href="sms:+18626680038" 
             onClick={handleSMS}
-            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
+            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-[6px] bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path>
@@ -74,7 +74,7 @@ export default function Contact() {
             href={`https://wa.me/18626680038?text=${encodeURIComponent(waInquiry)}`}
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full md:w-auto min-w-[200px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md text-white transition-all duration-300 hover:-translate-y-1" 
+            className="w-full md:w-auto min-w-[200px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-[6px] text-white transition-all duration-300 hover:-translate-y-1" 
             style={{ background: "var(--color-primary)" }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -90,7 +90,7 @@ export default function Contact() {
             href="https://www.instagram.com/cakes_byyas_/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
+            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-[6px] bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

@@ -255,7 +255,7 @@ export default function BentoGrid() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-base font-bold rounded-md transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-base font-bold rounded-[6px] transition-all duration-500 hover:scale-105 hover:shadow-2xl"
               style={{ color: "var(--color-primary)" }}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">

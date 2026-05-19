@@ -271,7 +271,7 @@ export default function Menu() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-6 rounded-md flex items-center justify-center gap-3 text-white font-semibold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:shadow-lg hover:-translate-y-1"
+                className="w-full py-4 px-6 rounded-[6px] flex items-center justify-center gap-3 text-white font-semibold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:shadow-lg hover:-translate-y-1"
                 style={{ background: "var(--color-primary)" }}
               >
                 <span>Order via WhatsApp</span>

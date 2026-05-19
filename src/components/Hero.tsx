@@ -182,7 +182,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => document.getElementById('pasteles')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer rounded-md"
               style={{
                 color: "var(--color-text)",
                 borderColor: "var(--color-text)",
@@ -194,7 +194,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer rounded-md"
               style={{
                 color: "var(--color-bg)",
                 borderColor: "var(--color-primary)",
@@ -295,7 +295,7 @@ export default function Hero() {
             <div className="hero-cta flex flex-wrap gap-4">
               <a
                 href="#pasteles"
-                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg rounded-md"
                 style={{
                   color: "var(--color-text)",
                   borderColor: "var(--color-text)",
@@ -314,7 +314,7 @@ export default function Hero() {
               </a>
               <a
                 href="#menu"
-                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg"
+                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg rounded-md"
                 style={{
                   color: "var(--color-bg)",
                   borderColor: "var(--color-primary)",

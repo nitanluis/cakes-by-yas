@@ -15,7 +15,13 @@ const NAV_LINKS_RIGHT = [
 ];
 
 const WHATSAPP_URL =
-  "https://wa.me/18626680038?text=Hola%20Yas!%20I'd%20like%20to%20order%20a%20custom%20cake.";
+  `https://wa.me/18626680038?text=${encodeURIComponent(
+    `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+    `-----------------------------------------\n\n` +
+    `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+    `Could you please provide me with more details and check availability for custom cake designs?\n\n` +
+    `Thank you so much!`
+  )}`;
 
 const NavLink = ({ label, href }: { label: string; href: string }) => (
   <Link

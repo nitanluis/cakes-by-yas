@@ -9,6 +9,18 @@ gsap.registerPlugin(useGSAP);
 export default function Contact() {
   const waRef = useRef<HTMLAnchorElement>(null);
 
+  const handleSMS = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const msg = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+      `-----------------------------------------\n\n` +
+      `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+      `Could you please provide me with more details and check availability for my order?\n\n` +
+      `Thank you so much!`;
+    const userAgent = typeof navigator !== 'undefined' ? (navigator.userAgent || navigator.vendor) : '';
+    const bodySymbol = /iPad|iPhone|iPod/.test(userAgent) ? '&' : '?';
+    window.location.href = `sms:+18626680038${bodySymbol}body=${encodeURIComponent(msg)}`;
+  };
+
   useGSAP(() => {
     if (waRef.current) {
       gsap.to(waRef.current, {
@@ -21,6 +33,12 @@ export default function Contact() {
       });
     }
   }, { scope: waRef });
+
+  const waInquiry = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+    `-----------------------------------------\n\n` +
+    `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+    `Could you please provide me with more details and check availability for my order?\n\n` +
+    `Thank you so much!`;
 
   return (
     <section id="contacto" className="px-6 md:px-12 pt-4 pb-16 md:pt-8 md:pb-24 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
@@ -39,7 +57,8 @@ export default function Contact() {
           {/* SMS */}
           <a 
             href="sms:+18626680038" 
-            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-2xl bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
+            onClick={handleSMS}
+            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path>
@@ -52,10 +71,10 @@ export default function Contact() {
           {/* WhatsApp */}
           <a 
             ref={waRef}
-            href="https://wa.me/18626680038" 
+            href={`https://wa.me/18626680038?text=${encodeURIComponent(waInquiry)}`}
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full md:w-auto min-w-[200px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-2xl text-white transition-all duration-300 hover:-translate-y-1" 
+            className="w-full md:w-auto min-w-[200px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md text-white transition-all duration-300 hover:-translate-y-1" 
             style={{ background: "var(--color-primary)" }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -71,7 +90,7 @@ export default function Contact() {
             href="https://www.instagram.com/cakes_byyas_/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-2xl bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
+            className="w-full md:w-auto min-w-[180px] flex justify-center items-center gap-3 py-4 md:py-5 px-6 rounded-md bg-[var(--color-bg-card)] shadow-soft transition-all duration-300 hover:shadow-medium hover:-translate-y-1 group border border-[#E8E0DA]/50"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

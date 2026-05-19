@@ -43,9 +43,9 @@ export default function Menu() {
       );
 
       // Animar items del menú
-      const items = gsap.utils.toArray(".menu-item");
+      const items = gsap.utils.toArray<HTMLElement>(".menu-item");
       
-      items.forEach((item: any) => {
+      items.forEach((item) => {
         gsap.fromTo(item,
           { y: 40, opacity: 0 },
           {
@@ -259,10 +259,19 @@ export default function Menu() {
               
               {/* WhatsApp CTA Button */}
               <a
-                href={`https://wa.me/18626680038?text=Hi%20Yas!%20I'd%20love%20to%20order%20the%20cake:%20*${encodeURIComponent(selectedImage.title)}*.%0A%0A_Starting%20Price:%20${encodeURIComponent(selectedImage.price)}_%0ADetails:%20${encodeURIComponent(selectedImage.desc)}`}
+                href={`https://wa.me/18626680038?text=${encodeURIComponent(
+                  `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+                  `-----------------------------------------\n` +
+                  `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n` +
+                  `✦ PRODUCT: ${selectedImage.title}\n` +
+                  `✦ STARTING PRICE: ${selectedImage.price}\n` +
+                  `✦ DESCRIPTION: ${selectedImage.desc}\n` +
+                  `Could you please provide me with more details and check availability for my order?\n` +
+                  `Thank you so much!`
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-6 rounded-full flex items-center justify-center gap-3 text-white font-semibold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:shadow-lg hover:-translate-y-1"
+                className="w-full py-4 px-6 rounded-md flex items-center justify-center gap-3 text-white font-semibold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:shadow-lg hover:-translate-y-1"
                 style={{ background: "var(--color-primary)" }}
               >
                 <span>Order via WhatsApp</span>

@@ -8,7 +8,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const WHATSAPP_URL =
-  "https://wa.me/18626680038?text=Hola%20Yas!%20Vi%20tu%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20consultar%20por%20un%20pastel...";
+  `https://wa.me/18626680038?text=${encodeURIComponent(
+    `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+    `-----------------------------------------\n\n` +
+    `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+    `Could you please provide me with more details and check availability for my order?\n\n` +
+    `Thank you so much!`
+  )}`;
 
 export default function BentoGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -243,13 +249,13 @@ export default function BentoGrid() {
               Ready to order?
             </h3>
             <p className="text-white/85 text-base mb-6 max-w-md">
-              Every cake is custom. Tell us your idea and we'll make it a reality.
+              Every cake is custom. Tell us your idea and we&apos;ll make it a reality.
             </p>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-base font-bold rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-base font-bold rounded-md transition-all duration-500 hover:scale-105 hover:shadow-2xl"
               style={{ color: "var(--color-primary)" }}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">

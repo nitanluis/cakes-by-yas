@@ -49,7 +49,7 @@ export default function Contact() {
         <h2 className="font-[family-name:var(--font-heading)] italic text-4xl md:text-5xl mb-6" style={{ color: "var(--color-text)" }}>
           Contact Us
         </h2>
-        <p className="text-sm md:text-base leading-relaxed mb-12" style={{ color: "var(--color-text-muted)" }}>
+        <p className="text-sm md:text-base leading-relaxed mb-12 w-full max-w-2xl break-words whitespace-normal" style={{ color: "var(--color-text-muted)" }}>
           Ready to order your custom cake? Reach out to us through your preferred channel.
         </p>
 

@@ -175,7 +175,7 @@ export default function Menu() {
                     <span
                       className="text-sm sm:text-base font-semibold whitespace-nowrap"
                       style={{
-                        color: "var(--color-primary)",
+                        color: "#3A3A3A",
                         transition: "all 0.4s ease",
                       }}
                     >

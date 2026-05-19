@@ -212,7 +212,7 @@ export default function PricingMenu() {
         </div>
 
         {/* Interactive Order Builder List */}
-        <div ref={listRef} className="w-full max-w-[1400px] flex flex-col gap-4 md:gap-5 min-h-[400px] pb-12 sm:pb-0">
+        <div ref={listRef} className="w-full max-w-[1400px] flex flex-col gap-4 md:gap-5 min-h-[400px] pb-32 sm:pb-0">
           {activeCategory?.items.map((item) => {
             const isExpanded = expandedId === item.id;
             const currentSize = selectedSizes[item.id];
@@ -250,7 +250,7 @@ export default function PricingMenu() {
                   
                   {item.price && (
                     <div className="shrink-0 mt-1 sm:mt-0 flex items-center justify-between w-full sm:w-auto pointer-events-none">
-                      <span className="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase" style={{ background: "rgba(234, 103, 125, 0.08)", color: "var(--color-primary)" }}>
+                      <span className="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase" style={{ background: "rgba(0, 0, 0, 0.04)", color: "#3A3A3A" }}>
                         {item.price}
                       </span>
                       {/* Mobile Expand Icon */}

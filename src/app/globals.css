@@ -81,6 +81,7 @@ body {
   position: relative;
 }
 
+
 /* ═══════════════════════════════════════════════
    TYPOGRAPHY
    ═══════════════════════════════════════════════ */
@@ -331,4 +332,97 @@ a.ig-pill:hover .ig-text {
 
 .sparkle-animate-2 {
   animation: sparkle-twinkle 4.5s ease-in-out infinite 1.5s;
+}
+
+/* ═══════════════════════════════════════════════
+   AMBIENT GLOW EFFECTS ✨ (GEMINI INSPIRED)
+   ═══════════════════════════════════════════════ */
+@keyframes ambient-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(12vw, 8vh) scale(1.15);
+  }
+  66% {
+    transform: translate(-8vw, 15vh) scale(0.9);
+  }
+}
+
+@keyframes ambient-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-12vw, -12vh) scale(1.1);
+  }
+}
+
+@keyframes ambient-float-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(8vw, -8vh) scale(0.95);
+  }
+  70% {
+    transform: translate(-4vw, 4vh) scale(1.05);
+  }
+}
+
+.ambient-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.22; /* Soft luxury shimmer, preserves contrast and legibility */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.ambient-blob-1 {
+  background: var(--color-primary);
+  width: 50vw;
+  height: 50vw;
+  top: -10vw;
+  left: -5vw;
+  animation: ambient-float-1 25s ease-in-out infinite;
+}
+
+.ambient-blob-2 {
+  background: var(--color-secondary);
+  width: 45vw;
+  height: 45vw;
+  bottom: -10vw;
+  right: -5vw;
+  animation: ambient-float-2 22s ease-in-out infinite;
+}
+
+.ambient-blob-3 {
+  background: #EEDCCE; /* Warm golden pastry tone */
+  width: 40vw;
+  height: 40vw;
+  top: 35%;
+  left: 60%;
+  animation: ambient-float-3 28s ease-in-out infinite;
+}
+
+/* Gourmet Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 0 8px 32px rgba(44, 36, 33, 0.03) !important;
 }

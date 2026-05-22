@@ -114,7 +114,6 @@ export default function Hero() {
       ref={containerRef}
       id="inicio"
       className="relative w-full overflow-hidden"
-      style={{ background: "var(--color-bg)" }}
     >
       {/* ═══════════════════════════════════════════════════════ */}
       {/* MOBILE HERO — Editorial Split Layout                   */}

@@ -65,7 +65,7 @@ export default function Navbar() {
     <nav
       id="navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-elegant ${
-        scrolled ? "bg-[var(--color-bg-card)]/90 backdrop-blur-md shadow-sm py-4 border-b border-[#E8E0DA]/50" : "bg-transparent py-6 md:py-8"
+        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur-xl shadow-sm py-4 border-b border-[#E8E0DA]/40" : "bg-transparent py-6 md:py-8"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex items-center justify-between">
@@ -145,19 +145,19 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`h-[2px] rounded-full transition-all duration-300 ${
+            className={`h-[2px] rounded-full pointer-events-none transition-all duration-300 ${
               mobileOpen ? "w-7 rotate-45 translate-y-[10px]" : "w-7"
             }`}
             style={{ background: "var(--color-primary)" }}
           />
           <span
-            className={`h-[2px] rounded-full transition-all duration-300 ${
+            className={`h-[2px] rounded-full pointer-events-none transition-all duration-300 ${
               mobileOpen ? "w-0 opacity-0" : "w-5 group-hover:w-7"
             }`}
             style={{ background: "var(--color-primary)" }}
           />
           <span
-            className={`h-[2px] rounded-full transition-all duration-300 ${
+            className={`h-[2px] rounded-full pointer-events-none transition-all duration-300 ${
               mobileOpen ? "w-7 -rotate-45 -translate-y-[10px]" : "w-6 group-hover:w-7"
             }`}
             style={{ background: "var(--color-primary)" }}
@@ -167,7 +167,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-elegant bg-[var(--color-bg-card)] shadow-medium border-b border-[#E8E0DA]/50 ${
+        className={`md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-elegant bg-[var(--color-bg)]/98 backdrop-blur-xl shadow-medium border-b border-[#E8E0DA]/40 ${
           mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >

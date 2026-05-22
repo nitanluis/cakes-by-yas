@@ -179,7 +179,7 @@ export default function PricingMenu() {
   const activeCategory = MENU_CATEGORIES.find(c => c.id === activeTab);
 
   return (
-    <section id="menu" className="w-full flex justify-center px-4 md:px-12 py-16 md:py-24 bg-[var(--color-bg)]">
+    <section id="menu" className="w-full flex justify-center px-4 md:px-12 py-16 md:py-24">
       <div ref={containerRef} className="w-full max-w-none xl:max-w-[1920px] px-0 md:px-8 flex flex-col items-center">
         
         <div className="text-center mb-12">
@@ -192,14 +192,14 @@ export default function PricingMenu() {
         </div>
 
         {/* Custom Tabs */}
-        <div className="w-full max-w-[600px] flex flex-col sm:flex-row bg-white rounded-[6px] p-1.5 md:p-2 mb-10 shadow-sm border border-[rgba(0,0,0,0.05)]">
+        <div className="w-full max-w-[600px] flex flex-col sm:flex-row glass-panel !rounded-[6px] p-1.5 md:p-2 mb-10">
           {MENU_CATEGORIES.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id); setExpandedId(null); }}
-                className={`flex-1 py-3 px-4 md:py-3.5 text-sm md:text-base font-semibold rounded-[6px] transition-all duration-300 active:scale-95 ${
+                className={`flex-1 py-3 px-4 md:py-3.5 text-sm md:text-base font-semibold rounded-[6px] transition-all duration-300 md:active:scale-95 ${
                   isActive 
                     ? "bg-[var(--color-primary)] text-white shadow-md" 
                     : "text-[var(--color-text-muted)] md:hover:text-[var(--color-primary)] md:hover:bg-[rgba(234,103,125,0.05)]"
@@ -226,12 +226,12 @@ export default function PricingMenu() {
             return (
               <div 
                 key={item.id}
-                className={`menu-item-card group relative flex flex-col rounded-2xl bg-white shadow-sm border isolate ${
+                className={`menu-item-card group relative flex flex-col rounded-2xl isolate ${
                   isExpanded 
-                    ? "border-[var(--color-primary)] shadow-md ring-1 ring-[var(--color-primary)] ring-opacity-20" 
-                    : "border-[rgba(0,0,0,0.03)] md:hover:shadow-md md:hover:border-[rgba(234,103,125,0.2)] cursor-pointer"
+                    ? "bg-white shadow-md border border-[var(--color-primary)] ring-1 ring-[var(--color-primary)] ring-opacity-20" 
+                    : "bg-white/50 backdrop-blur-md shadow-sm border border-white/60 md:hover:shadow-md md:hover:border-[rgba(234,103,125,0.25)] cursor-pointer"
                 }`}
-                style={{ transition: 'border-color 0.3s, box-shadow 0.3s' }}
+                style={{ transition: 'all 0.3s ease' }}
               >
                 {/* Header (Always Visible) */}
                 <button 

@@ -32,7 +32,7 @@ export default function About() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="about" className="px-6 md:px-12 pt-8 pb-2 md:pt-16 md:pb-8 w-full flex justify-center bg-[var(--color-bg)] relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="px-6 md:px-12 pt-8 pb-2 md:pt-16 md:pb-8 w-full flex justify-center relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[var(--color-secondary)]/10 blur-[120px] rounded-[100%] pointer-events-none -z-10" />
 

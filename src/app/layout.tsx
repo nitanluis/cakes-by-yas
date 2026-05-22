@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import AmbientGlow from "../components/AmbientGlow";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -100,7 +101,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AmbientGlow />
+        {children}
+      </body>
     </html>
   );
 }

@@ -6,7 +6,11 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const WA_INQUIRY = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+// Dynamic runtime emojis to bypass compiler/minifier string encoding bugs under Windows
+const eSparkles = typeof String !== 'undefined' ? String.fromCodePoint(0x2728) : '';
+const eCake = typeof String !== 'undefined' ? String.fromCodePoint(0x1F382) : '';
+
+const WA_INQUIRY = `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
   `-----------------------------------------\n\n` +
   `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
   `Could you please provide me with more details and check availability for custom cake designs?\n\n` +
@@ -23,7 +27,7 @@ export default function WhatsAppButton() {
 
   const handleSMS = (e: React.MouseEvent) => {
     e.preventDefault();
-    const msg = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+    const msg = `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
       `-----------------------------------------\n\n` +
       `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
       `Could you please provide me with more details and check availability for custom cake designs?\n\n` +

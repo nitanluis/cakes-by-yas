@@ -49,17 +49,11 @@ export default function Footer() {
           <div className="text-center md:text-left flex-1">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
               <img
-                src="/isotipo.png"
-                alt="Cakes by Yas isotipo"
-                className="w-8 h-8 object-contain"
+                src="/logo.png"
+                alt="Cakes by Yas"
+                className="h-10 w-auto object-contain"
                 loading="lazy"
               />
-              <h2
-                className="font-[family-name:var(--font-heading)] text-2xl font-bold italic"
-                style={{ color: "var(--color-text)" }}
-              >
-                Cakes by Yas.
-              </h2>
             </div>
             <p
               className="text-xs max-w-[280px] leading-relaxed mx-auto md:mx-0"

@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import productsData from "@/data/products.json";
+import CardStack from "@/components/CardStack";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -22,6 +23,7 @@ export default function SignatureCreations() {
   const containerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const [selectedItem, setSelectedItem] = useState<CreationItem | null>(null);
+  const [viewMode, setViewMode] = useState<'grid' | 'deck'>('grid');
 
   // Auto-open modal and scroll to section if "cake" search param is present in URL
   useEffect(() => {
@@ -112,23 +114,30 @@ export default function SignatureCreations() {
   };
 
   const getOrderMessage = (item: CreationItem | null | undefined) => {
+    // Dynamic runtime emojis to bypass compiler/minifier string encoding bugs under Windows
+    const eSparkles = String.fromCodePoint(0x2728);
+    const eCake = String.fromCodePoint(0x1F382);
+    const eShortcake = String.fromCodePoint(0x1F370);
+    const eMemo = String.fromCodePoint(0x1F4DD);
+    const eLink = String.fromCodePoint(0x1F517);
+
     if (item && item.id !== 'custom') {
       const origin = typeof window !== 'undefined' ? window.location.origin : '';
       const shareUrl = `${origin}/?cake=${item.id}`;
       
-      const messageText = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+      const messageText = `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
         `-----------------------------------------\n` +
-        `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n` +
-        `✦ PRODUCT: ${item.name}\n` +
-        `✦ DESCRIPTION: ${item.desc}\n` +
-        `✦ REFERENCE LINK: ${shareUrl}\n` +
+        `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+        `${eShortcake} PRODUCT: ${item.name}\n` +
+        `${eMemo} DESCRIPTION: ${item.desc}\n` +
+        `${eLink} LINK: ${shareUrl}\n\n` +
         `Could you please provide me with more details and check availability for my order?\n` +
         `Thank you so much!`;
         
       return encodeURIComponent(messageText);
     }
     
-    const customText = `✨ CAKES BY YAS • CUSTOM DESIGN ✨\n` +
+    const customText = `${eSparkles} CAKES BY YAS ${eCake} CUSTOM DESIGN ${eSparkles}\n` +
       `-----------------------------------------\n\n` +
       `Hello, Yas! I would love to discuss a fully custom cake design for my next special occasion.\n\n` +
       `Could you let me know how we can get started to check availability and details?\n\n` +
@@ -172,7 +181,10 @@ export default function SignatureCreations() {
           
           {/* Header */}
           <div className="creations-header text-center mb-12 md:mb-16">
-            <h2 className="relative inline-block font-[family-name:var(--font-heading)] italic text-4xl sm:text-5xl md:text-6xl mb-4" style={{ color: "var(--color-text)" }}>
+            <p className="typo-overline mb-3">
+              Edible Works of Art
+            </p>
+            <h2 className="relative inline-block typo-h2 mb-4">
               Signature Creations
               {/* Magic Sparkles */}
               <svg className="absolute -top-1.5 -left-5 w-4 h-4 text-[var(--color-primary)] fill-current sparkle-animate-2 pointer-events-none" viewBox="0 0 24 24">
@@ -182,66 +194,108 @@ export default function SignatureCreations() {
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" className="pointer-events-none"/>
               </svg>
             </h2>
-            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "var(--color-primary)" }}>
-              Edible Works of Art
-            </p>
-            <p className="text-sm md:text-base max-w-[460px] mx-auto leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+            <p className="typo-body max-w-[460px] mx-auto">
               Each creation is a unique piece, handcrafted with premium ingredients and Dominican artisan tradition.
             </p>
           </div>
 
-          {/* Interactive Gallery Grid */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 md:gap-6">
-            {productsData.map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  className="creation-card group relative rounded-2xl overflow-hidden cursor-pointer bg-white shadow-sm border border-[rgba(0,0,0,0.04)] transition-[box-shadow,border-color] duration-500 hover:shadow-xl hover:border-[rgba(234,103,125,0.15)]"
-                  onClick={() => setSelectedItem(item)}
-                >
-                  {/* Image */}
-                  <div className="relative w-full aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Hover overlay */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5"
-                    >
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <p className="text-white/90 text-xs sm:text-sm leading-relaxed">
+          {/* View Switcher Toggle */}
+          <div className="flex justify-center mb-10 md:mb-14">
+            <div className="relative flex p-1 bg-[#F0EBE7]/50 rounded-full border border-[#E8E0DA]/50 shadow-soft backdrop-blur-md max-w-xs">
+              {/* Highlight Slide */}
+              <div 
+                className="absolute top-1 bottom-1 rounded-full bg-[var(--color-primary)] shadow-sm transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                style={{
+                  left: viewMode === "grid" ? "4px" : "calc(50% + 2px)",
+                  width: "calc(50% - 6px)"
+                }}
+              />
+              
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`relative z-10 flex items-center justify-center gap-2 px-6 py-2.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest rounded-full transition-colors duration-500 ${
+                  viewMode === "grid" ? "text-white" : "text-gray-500 hover:text-gray-800"
+                }`}
+              >
+                <svg className="w-3.5 h-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+                </svg>
+                <span>Artisan Grid</span>
+              </button>
+              
+              <button
+                onClick={() => setViewMode("deck")}
+                className={`relative z-10 flex items-center justify-center gap-2 px-6 py-2.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest rounded-full transition-colors duration-500 ${
+                  viewMode === "deck" ? "text-white" : "text-gray-500 hover:text-gray-800"
+                }`}
+              >
+                <svg className="w-3.5 h-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                <span>Swipe Deck</span>
+              </button>
+            </div>
+          </div>
+
+          {viewMode === "grid" ? (
+            /* Interactive Gallery Grid */
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 md:gap-6">
+              {productsData.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className="creation-card group relative rounded-2xl overflow-hidden cursor-pointer bg-white shadow-sm border border-[rgba(0,0,0,0.04)] transition-[box-shadow,border-color] duration-500 hover:shadow-xl hover:border-[rgba(234,103,125,0.15)]"
+                    onClick={() => setSelectedItem(item)}
+                  >
+                    {/* Image */}
+                    <div className="relative w-full aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      {/* Hover overlay */}
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5"
+                      >
+                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <p className="text-white/90 text-xs sm:text-sm leading-relaxed">
+                            {item.desc}
+                          </p>
+                          <span className="inline-flex items-center gap-1.5 mt-3 text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-white/80">
+                            Click to expand
+                            <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info */}
+                    <div className="p-4 sm:p-5 flex justify-between items-center">
+                      <div>
+                        <h3 className="typo-h3 transition-colors duration-300 mb-1.5">
+                          {item.name}
+                        </h3>
+                        <p className="typo-body text-xs sm:text-sm line-clamp-2">
                           {item.desc}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 mt-3 text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-white/80">
-                          Click to expand
-                          <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                          </svg>
-                        </span>
                       </div>
                     </div>
                   </div>
-
-                  {/* Info */}
-                  <div className="p-4 sm:p-5 flex justify-between items-center">
-                    <div>
-                      <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-xl font-bold transition-colors duration-300" style={{ color: "var(--color-primary)" }}>
-                        {item.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm mt-1.5 leading-relaxed line-clamp-2" style={{ color: "#000000" }}>
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            /* Interactive Swipe Deck View */
+            <div className="w-full flex justify-center py-4 sm:py-8">
+              <CardStack items={productsData} onItemSelect={setSelectedItem} />
+            </div>
+          )}
 
           {/* Bottom CTA */}
           <div className="mt-12 md:mt-16 text-center flex flex-col items-center">

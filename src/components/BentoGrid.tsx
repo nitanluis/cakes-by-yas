@@ -9,11 +9,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WHATSAPP_URL =
   `https://wa.me/18626680038?text=${encodeURIComponent(
-    `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
-    `-----------------------------------------\n\n` +
-    `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
-    `Could you please provide me with more details and check availability for my order?\n\n` +
-    `Thank you so much!`
+    (() => {
+      const eSparkles = String.fromCodePoint(0x2728);
+      const eCake = String.fromCodePoint(0x1F382);
+      
+      return `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
+        `-----------------------------------------\n\n` +
+        `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+        `Could you please provide me with more details and check availability for my order?\n\n` +
+        `Thank you so much!`;
+    })()
   )}`;
 
 export default function BentoGrid() {

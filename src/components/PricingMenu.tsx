@@ -165,11 +165,17 @@ export default function PricingMenu() {
     const productName = size ? `${item.name} (${size.label})` : item.name;
     const flavorName = filling || "Traditional";
     
-    const msg = `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
+    // Dynamic runtime emojis to bypass compiler/minifier string encoding bugs under Windows
+    const eSparkles = String.fromCodePoint(0x2728);
+    const eCake = String.fromCodePoint(0x1F382);
+    const eShortcake = String.fromCodePoint(0x1F370);
+    const eCupcake = String.fromCodePoint(0x1F9C1);
+
+    const msg = `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
       `-----------------------------------------\n` +
-      `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n` +
-      `✦ PRODUCT: ${productName}\n` +
-      `✦ FLAVOR / FILLING: ${flavorName}\n` +
+      `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+      `${eShortcake} PRODUCT: ${productName}\n` +
+      `${eCupcake} FLAVOR / FILLING: ${flavorName}\n\n` +
       `Could you please provide me with more details and check availability for my order?\n` +
       `Thank you so much!`;
       
@@ -183,12 +189,12 @@ export default function PricingMenu() {
       <div ref={containerRef} className="w-full max-w-none xl:max-w-[1920px] px-0 md:px-8 flex flex-col items-center">
         
         <div className="text-center mb-12">
-          <h2 className="font-[family-name:var(--font-heading)] italic text-5xl md:text-6xl mb-4" style={{ color: "var(--color-text)" }}>
-            The Menu
-          </h2>
-          <p className="text-sm md:text-base uppercase tracking-[0.2em] font-medium" style={{ color: "var(--color-primary)" }}>
+          <p className="typo-overline mb-3">
             Tap to Customize & Order
           </p>
+          <h2 className="typo-h2 mb-4">
+            The Menu
+          </h2>
         </div>
 
         {/* Custom Tabs */}
@@ -240,10 +246,10 @@ export default function PricingMenu() {
                   onClick={() => toggleExpand(item.id)}
                 >
                   <div className="flex flex-col flex-1 pr-8 relative pointer-events-none">
-                    <h3 className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-semibold" style={{ color: "var(--color-primary)" }}>
+                    <h3 className="typo-h3 text-xl md:text-2xl font-semibold mb-1.5">
                       {item.name}
                     </h3>
-                    <p className="text-sm md:text-[15px] leading-relaxed mt-2" style={{ color: "var(--color-text-muted)" }}>
+                    <p className="typo-body text-sm md:text-[15px] mt-2">
                       {item.desc}
                     </p>
                   </div>

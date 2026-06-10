@@ -2,12 +2,18 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+/* ── Trust badge thumbnail sources ── */
+const TRUST_THUMBS = [
+  "/images/real_cakes/real_cake_1.jpeg",
+  "/images/real_cakes/real_cake_5.jpeg",
+  "/images/real_cakes/real_cake_7.jpeg",
+];
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -20,38 +26,53 @@ export default function Hero() {
       defaults: { ease: "power3.out" },
     });
 
-    // Title lines slide up with stagger
+    // Logo mask-reveal (cinematic wipe from left)
     tl.from(".hero-title-line", {
-      y: 100,
+      clipPath: "inset(0 100% 0 0)",
       opacity: 0,
-      stagger: 0.15,
-      duration: 1.2,
-      delay: 0.2,
+      duration: 1.4,
+      ease: "power4.inOut",
+      delay: 0.3,
     })
-    // Overline
+    // Overline fades in
     .from(".hero-overline", {
-      y: 15,
+      y: 12,
       opacity: 0,
       duration: 0.8,
-    }, "-=0.7")
-    // Subtitle and CTA
+    }, "-=0.6")
+    // Tagline slides up
+    .from(".hero-tagline", {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+    }, "-=0.4")
+    // Subtitle
     .from(".hero-subtitle", {
-      y: 25,
+      y: 20,
       opacity: 0,
       duration: 0.9,
-    }, "-=0.5")
+    }, "-=0.4")
+    // CTA
     .from(".hero-cta", {
       y: 15,
       opacity: 0,
       duration: 0.7,
-    }, "-=0.5")
+    }, "-=0.4")
     // Image reveal (both mobile and desktop)
     .from(imageRef.current, {
       scale: 1.05,
       opacity: 0,
       duration: 1.6,
       ease: "power2.out",
-    }, 0.1);
+    }, 0.1)
+    // Trust badge entrance
+    .from(".hero-trust", {
+      y: 30,
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.8,
+      ease: "back.out(1.4)",
+    }, "-=0.6");
 
     // ── Desktop-only scroll-driven parallax ──
     const mm = gsap.matchMedia();
@@ -94,6 +115,19 @@ export default function Hero() {
         },
       });
 
+      // Trust badge fades on scroll
+      gsap.to(".hero-trust", {
+        opacity: 0,
+        y: -20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "8% top",
+          end: "30% top",
+          scrub: true,
+        },
+      });
+
       // Subtle darken
       gsap.to(overlayRef.current, {
         opacity: 0.25,
@@ -104,6 +138,15 @@ export default function Hero() {
           end: "bottom top",
           scrub: true,
         },
+      });
+
+      // Trust badge gentle float
+      gsap.to(".hero-trust", {
+        y: "-=8",
+        duration: 3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
     });
 
@@ -120,8 +163,8 @@ export default function Hero() {
       {/* ═══════════════════════════════════════════════════════ */}
       <div className="md:hidden flex flex-col" style={{ minHeight: '100svh' }}>
         
-        {/* Top: Image Block — cropped to the beautiful part */}
-        <div ref={imageRef} className="relative w-full" style={{ height: '50svh', minHeight: '280px' }}>
+        {/* Top: Image Block — larger ratio for impact */}
+        <div ref={imageRef} className="relative w-full" style={{ height: '55svh', minHeight: '320px' }}>
           <Image
             src="/images/hero_created_hq.jpg"
             alt="Artisanal custom cake by Cakes by Yas featuring fresh flowers"
@@ -130,77 +173,73 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover object-[70%_35%]"
           />
-          {/* Soft fade to background at bottom — tall for seamless blend */}
+          {/* Soft fade to background at bottom */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-44 pointer-events-none"
             style={{
               background: `linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%)`,
             }}
           />
         </div>
 
-        {/* Bottom: Brand Content Block — pulled up into image fade for unity */}
-        <div className="flex-1 flex flex-col justify-center px-5 pb-8 -mt-24 relative z-10">
+        {/* Bottom: Brand Content Block — centered on mobile */}
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-6 pb-10 -mt-28 relative z-10">
           
           {/* Overline */}
-          <p
-            className="hero-overline text-[10px] uppercase tracking-[0.3em] mb-4 font-medium"
-            style={{ color: "var(--color-primary)" }}
-          >
+          <p className="hero-overline typo-overline mb-3 opacity-70">
             Artisan Cake Studio · Spring, TX
           </p>
 
-          {/* Title — Large Brand Name */}
-          <div className="mb-3">
-            <h1>
-              <span
-                className="hero-title-line block font-[family-name:var(--font-heading)] text-[13vw] font-normal italic leading-[0.9] tracking-tight"
-                style={{ color: "var(--color-text)" }}
-              >
-                Cakes By <span className="relative inline-block" style={{ color: "var(--color-primary)" }}>
-                  Yas.
-                  <svg className="absolute -top-1 -right-4 w-4 h-4 text-[var(--color-primary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
-                    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
-                  </svg>
-                </span>
-              </span>
-            </h1>
+          {/* Decorative accent line */}
+          <div className="w-8 h-px bg-[var(--color-primary)] opacity-40 mb-4" />
+
+          {/* Title — Logo Image */}
+          <div className="hero-title-line mb-2">
+            <h1 className="sr-only">Cakes By Yas</h1>
+            <img 
+              src="/logo.png" 
+              alt="Cakes By Yas" 
+              className="h-16 sm:h-20 w-auto object-contain mx-auto"
+            />
           </div>
 
+          {/* Tagline — Playfair italic */}
+          <p className="hero-tagline typo-intro mt-1 mb-6">
+            Where Every Cake Tells a Story
+          </p>
+
           {/* Subtitle */}
-          <p
-            className="hero-subtitle text-[13px] max-w-[320px] leading-relaxed mb-6"
-            style={{ color: "var(--color-text-muted)", letterSpacing: "0.02em" }}
-          >
+          <p className="hero-subtitle typo-body max-w-[300px] mb-7">
             Handcrafted celebration cakes and bespoke pastry design,
             made with love to elevate your most unforgettable moments.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="hero-cta flex gap-3">
+          {/* CTA — Single primary pill + text link */}
+          <div className="hero-cta flex flex-col items-center gap-3 w-full">
             <button
               type="button"
               onClick={() => document.getElementById('pasteles')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer rounded-[6px]"
+              className="hero-cta-primary typo-button inline-flex items-center justify-center gap-2.5 w-full max-w-[280px] px-8 py-3.5 rounded-full touch-manipulation cursor-pointer transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5"
               style={{
-                color: "var(--color-text)",
-                borderColor: "var(--color-text)",
-                background: "transparent",
+                color: "var(--color-bg)",
+                background: "var(--color-primary)",
               }}
             >
-              Our Creations
+              Explore Our Creations
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </button>
             <button
               type="button"
               onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-semibold border touch-manipulation cursor-pointer rounded-[6px]"
-              style={{
-                color: "var(--color-bg)",
-                borderColor: "var(--color-primary)",
-                background: "var(--color-primary)",
-              }}
+              className="typo-button inline-flex items-center gap-1.5 tracking-[0.15em] font-medium touch-manipulation cursor-pointer transition-colors duration-300 hover:text-[var(--color-primary)]"
+              style={{ color: "var(--color-text-muted)" }}
             >
-              Our Menu
+              View Full Menu
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
             </button>
           </div>
         </div>
@@ -209,7 +248,7 @@ export default function Hero() {
       {/* ═══════════════════════════════════════════════════════ */}
       {/* DESKTOP HERO — Full-screen immersive background        */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <div className="hidden md:block" style={{ height: "100svh", minHeight: "600px" }}>
+      <div className="hidden md:block h-svh min-h-[600px]">
         {/* Full-screen background image */}
         <div
           className="hero-desktop-image absolute inset-0"
@@ -225,16 +264,16 @@ export default function Hero() {
           />
           {/* Hide bottom-right watermark */}
           <div className="absolute bottom-0 right-0 w-[15vw] max-w-[200px] h-[8vh] max-h-[80px] bg-gradient-to-tl from-[#Eae8e6] via-[#Eae8e6]/80 to-transparent z-[1]" />
-          {/* Left fade into bg */}
+          {/* Left fade into bg — angled gradient for editorial energy */}
           <div
             className="absolute inset-0"
             style={{
               background: `linear-gradient(
-                to right,
+                105deg,
                 var(--color-bg) 0%,
-                rgba(253,248,248,0.9) 20%,
-                rgba(253,248,248,0.4) 45%,
-                transparent 70%
+                rgba(253,248,248,0.92) 22%,
+                rgba(253,248,248,0.5) 42%,
+                transparent 62%
               )`,
             }}
           />
@@ -248,87 +287,61 @@ export default function Hero() {
         />
 
         {/* Content Layer */}
-        <div className="relative z-10 h-full flex flex-col justify-between px-12 lg:px-20 max-w-none w-full">
+        <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-20 xl:px-28 max-w-[1400px] mx-auto w-full">
           
-          {/* Spacer for navbar */}
-          <div className="pt-36" />
-
-          {/* Main content */}
-          <div className="hero-content-block flex-1 flex flex-col justify-center max-w-[800px]">
+          {/* Main content — pinned to optical center */}
+          <div className="hero-content-block flex-1 flex flex-col justify-center max-w-[520px] pt-[18vh]">
             
-            {/* Overline */}
-            <p
-              className="hero-overline text-xs uppercase tracking-[0.3em] mb-8 font-medium"
-              style={{ color: "var(--color-primary)" }}
-            >
+            {/* Overline — Beat 1: Whisper */}
+            <p className="hero-overline typo-overline mb-10 opacity-70">
               Artisan Cake Studio · Spring, TX
             </p>
 
-            {/* Title */}
-            <div className="mb-5">
-              <h1>
-                <span
-                  className="hero-title-line block font-[family-name:var(--font-heading)] text-[clamp(3rem,7vw,6.5rem)] font-normal italic leading-[0.95] tracking-tight whitespace-nowrap"
-                  style={{ color: "var(--color-text)" }}
-                >
-                  Cakes By <span className="relative inline-block" style={{ color: "var(--color-primary)" }}>
-                    Yas.
-                    <svg className="absolute -top-3 -right-6 w-6 h-6 text-[var(--color-primary)] fill-current sparkle-animate-1" viewBox="0 0 24 24">
-                      <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
-                    </svg>
-                  </span>
-                </span>
-              </h1>
+            {/* Title — Beat 2: Shout (Logo + Tagline) */}
+            <div className="hero-title-line mb-3">
+              <h1 className="sr-only">Cakes By Yas</h1>
+              <img 
+                src="/logo.png" 
+                alt="Cakes By Yas" 
+                className="h-28 lg:h-32 xl:h-36 w-auto object-contain"
+              />
             </div>
 
+            {/* Tagline — Playfair italic (editorial voice) */}
+            <p className="hero-tagline typo-intro text-lg lg:text-xl xl:text-[22px] mt-1 mb-9">
+              Where Every Cake Tells a Story
+            </p>
+
             {/* Subtitle */}
-            <p
-              className="hero-subtitle text-base max-w-[360px] leading-relaxed mb-10"
-              style={{ color: "var(--color-text-muted)", letterSpacing: "0.02em" }}
-            >
+            <p className="hero-subtitle typo-body text-[15px] max-w-[420px] mb-10 lg:mb-12">
               Handcrafted celebration cakes and bespoke pastry design,
               made with love to elevate your most unforgettable moments.
             </p>
 
-            {/* CTA */}
-            <div className="hero-cta flex flex-wrap gap-4">
+            {/* CTA — Beat 3: Invite (Single primary + text link) */}
+            <div className="hero-cta flex flex-col items-start gap-4">
               <a
                 href="#pasteles"
-                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg rounded-[6px]"
+                className="hero-cta-primary typo-button group inline-flex items-center gap-3 px-10 py-4 rounded-full transition-all duration-500 ease-elegant hover:shadow-xl hover:-translate-y-0.5"
                 style={{
-                  color: "var(--color-text)",
-                  borderColor: "var(--color-text)",
-                  background: "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--color-text)";
-                  e.currentTarget.style.color = "var(--color-bg)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "var(--color-text)";
+                  color: "var(--color-bg)",
+                  background: "var(--color-primary)",
                 }}
               >
-                Our Creations
+                Explore Our Creations
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
               <a
                 href="#menu"
-                className="inline-block px-8 py-3.5 text-[12px] uppercase tracking-[0.2em] font-semibold border transition-all duration-500 hover:shadow-lg rounded-[6px]"
-                style={{
-                  color: "var(--color-bg)",
-                  borderColor: "var(--color-primary)",
-                  background: "var(--color-primary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "var(--color-primary)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "var(--color-primary)";
-                  e.currentTarget.style.color = "var(--color-bg)";
-                }}
+                className="typo-button inline-flex items-center gap-2 tracking-[0.15em] font-medium transition-colors duration-300 hover:text-[var(--color-primary)] ml-1"
+                style={{ color: "var(--color-text-muted)" }}
               >
-                Our Menu
+                View Full Menu
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
               </a>
             </div>
           </div>
@@ -352,6 +365,32 @@ export default function Hero() {
               style={{ color: "var(--color-text-muted)" }}
             >
               Made with Love · Spring &amp; The Woodlands, Texas
+            </p>
+          </div>
+        </div>
+
+        {/* ── Trust Badge — glassmorphic social proof ── */}
+        <div className="hero-trust hidden lg:flex items-center gap-4 glass-panel px-6 py-4 rounded-2xl absolute bottom-[18vh] right-[6vw] xl:right-[10vw] z-20">
+          {/* Stacked mini cake thumbnails */}
+          <div className="flex -space-x-2.5">
+            {TRUST_THUMBS.map((src, i) => (
+              <div key={i} className="w-9 h-9 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                <Image 
+                  src={src} 
+                  alt="" 
+                  width={36} 
+                  height={36}
+                  className="object-cover w-full h-full" 
+                />
+              </div>
+            ))}
+          </div>
+          <div>
+            <p className="text-[13px] font-semibold" style={{ color: "var(--color-text)" }}>
+              250+ Cakes Delivered
+            </p>
+            <p className="text-[10px] uppercase tracking-widest" style={{ color: "var(--color-text-muted)" }}>
+              Spring &amp; The Woodlands
             </p>
           </div>
         </div>

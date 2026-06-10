@@ -260,14 +260,22 @@ export default function Menu() {
               {/* WhatsApp CTA Button */}
               <a
                 href={`https://wa.me/18626680038?text=${encodeURIComponent(
-                  `✨ CAKES BY YAS • NEW INQUIRY ✨\n` +
-                  `-----------------------------------------\n` +
-                  `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n` +
-                  `✦ PRODUCT: ${selectedImage.title}\n` +
-                  `✦ STARTING PRICE: ${selectedImage.price}\n` +
-                  `✦ DESCRIPTION: ${selectedImage.desc}\n` +
-                  `Could you please provide me with more details and check availability for my order?\n` +
-                  `Thank you so much!`
+                  (() => {
+                    const eSparkles = String.fromCodePoint(0x2728);
+                    const eCake = String.fromCodePoint(0x1F382);
+                    const eShortcake = String.fromCodePoint(0x1F370);
+                    const ePrice = String.fromCodePoint(0x1F4B5);
+                    const eMemo = String.fromCodePoint(0x1F4DD);
+                    
+                    return `${eSparkles} CAKES BY YAS ${eCake} NEW INQUIRY ${eSparkles}\n` +
+                      `-----------------------------------------\n` +
+                      `Hello, Yas! I would love to make an inquiry from your signature artisan menu.\n\n` +
+                      `${eShortcake} PRODUCT: ${selectedImage.title}\n` +
+                      `${ePrice} STARTING PRICE: ${selectedImage.price}\n` +
+                      `${eMemo} DESCRIPTION: ${selectedImage.desc}\n\n` +
+                      `Could you please provide me with more details and check availability for my order?\n` +
+                      `Thank you so much!`;
+                  })()
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
